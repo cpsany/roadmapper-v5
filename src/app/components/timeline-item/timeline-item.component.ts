@@ -82,7 +82,7 @@ import { LucideAngularModule, Star } from 'lucide-angular';
 
     .task-bar.continuation {
       border-style: dashed;
-      opacity: 0.7;
+      border-width: 1px;
     }
 
     .task-bar.high-value::after {

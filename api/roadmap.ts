@@ -1,9 +1,5 @@
 import { kv } from '@vercel/kv';
 
-export const config = {
-    runtime: 'edge',
-};
-
 export default async function handler(request: Request) {
     const url = new URL(request.url);
     const key = 'roadmap_data_v3';
@@ -16,7 +12,8 @@ export default async function handler(request: Request) {
                 headers: { 'content-type': 'application/json' },
             });
         } catch (error) {
-            return new Response(JSON.stringify({ error: 'Failed to load data' }), { status: 500 });
+            console.error('KV GET Error:', error);
+            return new Response(JSON.stringify({ error: 'Failed to load data', details: String(error) }), { status: 500 });
         }
     }
 
@@ -29,7 +26,8 @@ export default async function handler(request: Request) {
                 headers: { 'content-type': 'application/json' },
             });
         } catch (error) {
-            return new Response(JSON.stringify({ error: 'Failed to save data' }), { status: 500 });
+            console.error('KV POST Error:', error);
+            return new Response(JSON.stringify({ error: 'Failed to save data', details: String(error) }), { status: 500 });
         }
     }
 
