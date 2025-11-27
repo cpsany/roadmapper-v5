@@ -1,0 +1,46 @@
+<div class="roadmap" [style.grid-template-columns]="gridTemplateColumns()">
+    <!-- Timeline Header -->
+    <div class="timeline-header">
+        <!-- Timeline Header -->
+        <div class="timeline-header">
+            <!-- Corner removed as it's now in Sidebar -->
+
+            <div *ngFor="let sprint of sprints()" class="sprint-header">
+                <span class="quarter-badge" *ngIf="sprint.quarter">{{ sprint.quarter }}</span>
+                <div class="sprint-number">S-{{ sprint.number }}</div>
+                <div class="sprint-dates">
+                    {{ formatDate(sprint.start) }} –<br>{{ formatDate(sprint.end) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Lanes -->
+        <div *ngFor="let lane of lanes(); let i = index" class="track-row">
+            <!-- Grid Cells -->
+
+            <!-- Grid Cells -->
+            <div *ngFor="let sprint of sprints()" class="track-cell"
+                (mouseenter)="hoveredCell = { laneId: lane.id, sprintNumber: sprint.number }"
+                (mouseleave)="hoveredCell = null">
+
+                <!-- Ghost Add Button -->
+                <div class="cell-actions"
+                    *ngIf="hoveredCell?.laneId === lane.id && hoveredCell?.sprintNumber === sprint.number">
+                    <button class="btn-icon ghost-add" (click)="addTaskToSprint(lane.id, sprint, $event)"
+                        title="Add Item to Sprint">
+                        <lucide-icon name="plus" [size]="16"></lucide-icon>
+                    </button>
+                </div>
+
+                <!-- Render items that belong to this sprint -->
+                <ng-container *ngFor="let item of getItemsForSprint(lane, sprint)">
+                    <app-timeline-item [item]="item" [categoryId]="lane.categoryId"
+                        [isStart]="isItemStart(item, sprint)" [isEnd]="isItemEnd(item, sprint)"
+                        [isContinuation]="!isItemStart(item, sprint)"
+                        (click)="taskClick.emit({ item: item, laneId: lane.id })"
+                        (mousedown)="onItemMouseDown($event, item, lane.id)">
+                    </app-timeline-item>
+                </ng-container>
+            </div>
+        </div>
+    </div>

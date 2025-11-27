@@ -1,0 +1,45 @@
+<div class="toolbar">
+    <!-- Left: Add Track -->
+    <button class="btn btn-primary" (click)="onAddTrackClick()">
+        <lucide-icon name="plus" [size]="14"></lucide-icon> Add Track
+    </button>
+
+    <div class="toolbar-divider"></div>
+
+    <!-- Filter & Status -->
+    <div class="toolbar-group">
+        <button class="btn btn-ghost">
+            <lucide-icon name="filter" [size]="14"></lucide-icon> Filter
+        </button>
+        <button class="btn btn-ghost">
+            <lucide-icon name="list" [size]="14"></lucide-icon> Status
+        </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <!-- Center: Search -->
+    <div class="search-box">
+        <lucide-icon name="search" [size]="14" class="search-icon"></lucide-icon>
+        <input type="text" placeholder="Search tasks..." (input)="onSearch($event)">
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <!-- Right: Zoom & Theme -->
+    <div class="toolbar-group">
+        <button class="btn btn-ghost" (click)="zoomOut()">
+            <lucide-icon name="minus" [size]="14"></lucide-icon>
+        </button>
+        <span class="zoom-level">{{ zoomLevel }}%</span>
+        <button class="btn btn-ghost" (click)="zoomIn()">
+            <lucide-icon name="plus" [size]="14"></lucide-icon>
+        </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <button class="btn btn-ghost" (click)="toggleTheme()">
+        <lucide-icon name="sun" [size]="14"></lucide-icon> Theme
+    </button>
+</div>

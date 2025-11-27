@@ -1,0 +1,55 @@
+<div class="modal-overlay" (click)="close.emit()"></div>
+<div class="modal-content">
+    <div class="modal-header">
+        <h2>Roadmap Settings</h2>
+        <button class="btn-icon" (click)="close.emit()">✕</button>
+    </div>
+
+    <div class="modal-body">
+        <div class="section">
+            <h3>Sprint Configuration</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Sprint #</label>
+                    <input type="number" [(ngModel)]="editingSettings.sprintStartNumber" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Duration (Weeks)</label>
+                    <input type="number" [(ngModel)]="editingSettings.sprintDurationWeeks" class="form-control" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" [ngModel]="editingSettings.sprintStartDate | date:'yyyy-MM-dd'"
+                        (ngModelChange)="editingSettings.sprintStartDate = $event" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Number of Sprints</label>
+                    <input type="number" [(ngModel)]="editingSettings.numberOfSprints" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Display Options</h3>
+            <div class="form-group checkbox">
+                <label>
+                    <input type="checkbox" [(ngModel)]="editingSettings.showQuarterMarkers" />
+                    Show Quarter Markers
+                </label>
+            </div>
+            <div class="form-group checkbox">
+                <label>
+                    <input type="checkbox" [(ngModel)]="editingSettings.showResourceTotals" />
+                    Show Resource Totals
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="close.emit()">Cancel</button>
+        <button class="btn btn-primary" (click)="save()">Save Settings</button>
+    </div>
+</div>

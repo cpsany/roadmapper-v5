@@ -1,0 +1,35 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Add New Track</span>
+            <button class="btn-icon" (click)="onCancel()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">Track Name</label>
+                <input type="text" class="form-input" [(ngModel)]="name" placeholder="e.g., Mobile Upload" autofocus>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <div class="category-select">
+                    <div *ngFor="let cat of categories" class="category-option"
+                        [ngClass]="[cat.class, selectedCategoryId === cat.id ? 'selected' : '']"
+                        (click)="selectCategory(cat.id)">
+                        {{ cat.name }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Objective</label>
+                <textarea class="form-input form-textarea" [(ngModel)]="description"
+                    placeholder="Describe the goal and business value of this track..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-primary" (click)="onSave()" [disabled]="!name.trim()">Add Track</button>
+        </div>
+    </div>
+</div>

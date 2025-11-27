@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap Maker - UI Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --bg-hover: #30363d;
+      --bg-active: #388bfd26;
+      
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      
+      --border-default: #30363d;
+      --border-muted: #21262d;
+      
+      --accent-blue: #58a6ff;
+      --accent-green: #3fb950;
+      --accent-orange: #f78166;
+      --accent-purple: #a371f7;
+      --accent-yellow: #f0c14b;
+      
+      --smart-img: #3fb950;
+      --ai-related: #58a6ff;
+      --one-off: #f78166;
+      --ongoing: #a371f7;
+      --revenue: #f0c14b;
+      
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      
+      --sidebar-width: 300px;
+      --header-height: 60px;
+      --toolbar-height: 48px;
+      --legend-height: 44px;
+      --sprint-width: 130px;
+      --track-height: 88px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Layout */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      height: var(--header-height);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--bg-primary);
+    }
+
+    .roadmap-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .roadmap-selector:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .roadmap-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .dropdown-icon {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: var(--bg-primary);
+    }
+
+    .btn-primary:hover {
+      background: #79b8ff;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      height: var(--toolbar-height);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border-default);
+      margin: 0 8px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      width: 200px;
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-icon {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Legend */
+    .legend-bar {
+      height: var(--legend-height);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .legend-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .legend-section-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .legend-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .legend-item.active {
+      background: var(--bg-active);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .resource-badge-sm {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .track-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .track-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .track-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .track-item.selected {
+      background: var(--bg-active);
+      border-left: 2px solid var(--accent-blue);
+    }
+
+    .track-item-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .track-drag-handle {
+      color: var(--text-muted);
+      cursor: grab;
+      padding: 2px;
+    }
+
+    .track-drag-handle:hover {
+      color: var(--text-secondary);
+    }
+
+    .track-category-badge {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .track-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .track-objective {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .track-item-actions {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .track-item:hover .track-item-actions {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    /* Grid Area */
+    .grid-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .grid-header {
+      display: flex;
+      border-bottom: 1px solid var(--border-default);
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+    }
+
+    .sprint-header {
+      width: var(--sprint-width);
+      padding: 10px 8px;
+      text-align: center;
+      border-left: 1px solid var(--border-muted);
+      flex-shrink: 0;
+    }
+
+    .sprint-header:first-child {
+      border-left: none;
+    }
+
+    .quarter-badge {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: rgba(88, 166, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .sprint-number {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .sprint-dates {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .grid-body {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .track-row {
+      display: flex;
+      border-bottom: 1px solid var(--border-muted);
+      min-height: var(--track-height);
+    }
+
+    .track-row:nth-child(odd) {
+      background: rgba(22, 27, 34, 0.3);
+    }
+
+    .grid-cell {
+      width: var(--sprint-width);
+      border-left: 1px solid var(--border-muted);
+      padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .grid-cell:first-child {
+      border-left: none;
+    }
+
+    .grid-cell:hover {
+      background: rgba(88, 166, 255, 0.05);
+    }
+
+    .grid-cell.drop-target {
+      background: rgba(88, 166, 255, 0.1);
+      outline: 2px dashed var(--accent-blue);
+      outline-offset: -2px;
+    }
+
+    /* Task Bar */
+    .task-bar {
+      width: calc(100% - 8px);
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .task-bar:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .task-bar.selected {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 1px;
+    }
+
+    .task-bar.smart-img {
+      background: rgba(63, 185, 80, 0.15);
+      border: 1px solid var(--smart-img);
+      color: var(--smart-img);
+    }
+
+    .task-bar.ai-related {
+      background: rgba(88, 166, 255, 0.15);
+      border: 1px solid var(--ai-related);
+      color: var(--ai-related);
+    }
+
+    .task-bar.one-off {
+      background: rgba(247, 129, 102, 0.15);
+      border: 1px solid var(--one-off);
+      color: var(--one-off);
+    }
+
+    .task-bar.ongoing {
+      background: rgba(163, 113, 247, 0.15);
+      border: 1px solid var(--ongoing);
+      color: var(--ongoing);
+    }
+
+    .task-bar.continuation {
+      border-style: dashed;
+      opacity: 0.8;
+    }
+
+    .task-bar .high-value {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      font-size: 8px;
+    }
+
+    .resource-row {
+      display: flex;
+      gap: 2px;
+      justify-content: center;
+    }
+
+    .resource-badge {
+      width: 20px;
+      height: 16px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .resource-badge.fe { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+    .resource-badge.be { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+    .resource-badge.ml { background: rgba(247, 129, 102, 0.2); color: var(--accent-orange); }
+    .resource-badge.ux { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+
+    /* Add Task Button */
+    .add-task-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px dashed var(--border-default);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      opacity: 0;
+      transition: all 0.15s;
+    }
+
+    .grid-cell:hover .add-task-btn {
+      opacity: 1;
+    }
+
+    .add-task-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    /* Side Panel */
+    .side-panel {
+      width: 360px;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .side-panel.hidden {
+      display: none;
+    }
+
+    .panel-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .form-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .sprint-range {
+      display: flex;
+      gap: 12px;
+    }
+
+    .sprint-select {
+      flex: 1;
+    }
+
+    .resource-allocation {
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .resource-allocation-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-default);
+    }
+
+    .resource-sprint-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 60px;
+      text-align: center;
+    }
+
+    .resource-allocation-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .resource-type-label {
+      width: 80px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .resource-input {
+      width: 50px;
+      padding: 4px 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-blue);
+    }
+
+    .panel-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border-default);
+      display: flex;
+      gap: 8px;
+    }
+
+    .panel-footer .btn {
+      flex: 1;
+    }
+
+    /* Footer Stats */
+    .footer-stats {
+      height: 40px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .save-status {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .save-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-hover);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.hidden {
+      display: none;
+    }
+
+    .modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      width: 480px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border-default);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* Category select */
+    .category-select {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .category-option {
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .category-option:hover {
+      transform: scale(1.02);
+    }
+
+    .category-option.selected {
+      border-color: currentColor;
+    }
+
+    .category-option.smart-img {
+      background: rgba(63, 185, 80, 0.15);
+      color: var(--smart-img);
+    }
+
+    .category-option.ai-related {
+      background: rgba(88, 166, 255, 0.15);
+      color: var(--ai-related);
+    }
+
+    .category-option.one-off {
+      background: rgba(247, 129, 102, 0.15);
+      color: var(--one-off);
+    }
+
+    .category-option.ongoing {
+      background: rgba(163, 113, 247, 0.15);
+      color: var(--ongoing);
+    }
+
+    .category-option.revenue {
+      background: rgba(240, 193, 75, 0.15);
+      color: var(--revenue);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">R</div>
+        <span>Roadmap Maker</span>
+      </div>
+      
+      <div class="roadmap-selector">
+        <span class="roadmap-title">Vision 2026 Roadmap</span>
+        <span class="dropdown-icon">▼</span>
+      </div>
+      
+      <div class="header-actions">
+        <button class="btn btn-ghost">
+          <span>↶</span> Undo
+        </button>
+        <button class="btn btn-ghost">
+          <span>↷</span> Redo
+        </button>
+        <button class="btn btn-secondary">
+          <span>⚙</span> Settings
+        </button>
+        <button class="btn btn-secondary">
+          <span>↓</span> Export
+        </button>
+        <button class="btn btn-primary">
+          <span>✓</span> Saved
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="btn btn-primary" onclick="showAddTrackModal()">
+          <span>+</span> Add Track
+        </button>
+      </div>
+      
+      <div class="toolbar-divider"></div>
+      
+      <div class="toolbar-group">
+        <button class="btn btn-ghost">
+          <span>⊞</span> Filter
+        </button>
+        <button class="btn btn-ghost">
+          <span>◉</span> Status
+        </button>
+      </div>
+      
+      <div class="toolbar-divider"></div>
+      
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search tasks...">
+      </div>
+      
+      <div class="toolbar-divider"></div>
+      
+      <div class="toolbar-group">
+        <button class="btn btn-ghost">−</button>
+        <span style="font-size: 12px; color: var(--text-secondary);">100%</span>
+        <button class="btn btn-ghost">+</button>
+      </div>
+      
+      <div class="toolbar-divider"></div>
+      
+      <button class="btn btn-ghost">
+        <span>☀</span> Theme
+      </button>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <div class="legend-section">
+        <span class="legend-section-title">Categories</span>
+        <div class="legend-item active">
+          <span class="legend-dot" style="background: var(--smart-img);"></span>
+          Smart Image
+        </div>
+        <div class="legend-item active">
+          <span class="legend-dot" style="background: var(--ai-related);"></span>
+          AI / ML
+        </div>
+        <div class="legend-item active">
+          <span class="legend-dot" style="background: var(--one-off);"></span>
+          One-off
+        </div>
+        <div class="legend-item active">
+          <span class="legend-dot" style="background: var(--ongoing);"></span>
+          Ongoing
+        </div>
+        <div class="legend-item active">
+          <span class="legend-dot" style="background: var(--revenue);"></span>
+          Revenue
+        </div>
+      </div>
+      
+      <div style="width: 1px; height: 20px; background: var(--border-default);"></div>
+      
+      <div class="legend-section">
+        <span class="legend-section-title">Resources</span>
+        <div class="legend-item">
+          <span class="resource-badge-sm" style="background: rgba(88, 166, 255, 0.2); color: var(--accent-blue);">F</span>
+          Frontend
+        </div>
+        <div class="legend-item">
+          <span class="resource-badge-sm" style="background: rgba(63, 185, 80, 0.2); color: var(--accent-green);">B</span>
+          Backend
+        </div>
+        <div class="legend-item">
+          <span class="resource-badge-sm" style="background: rgba(247, 129, 102, 0.2); color: var(--accent-orange);">M</span>
+          ML
+        </div>
+        <div class="legend-item">
+          <span class="resource-badge-sm" style="background: rgba(163, 113, 247, 0.2); color: var(--accent-purple);">U</span>
+          UX/UI
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <span class="sidebar-title">Tracks (18)</span>
+          <button class="btn-icon" title="Collapse all">☰</button>
+        </div>
+        
+        <div class="track-list">
+          <div class="track-item selected">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(63, 185, 80, 0.15); color: var(--smart-img);">Smart Image</span>
+            </div>
+            <div class="track-name">Bulk Analysis</div>
+            <div class="track-objective">Scan all images upon upload with AWS Rekognition to store vector attributes and face vectors.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+          
+          <div class="track-item">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(63, 185, 80, 0.15); color: var(--smart-img);">Smart Image</span>
+            </div>
+            <div class="track-name">Vector Embedding</div>
+            <div class="track-objective">Build vector database for candid pics enabling revamped tagging/searching.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+          
+          <div class="track-item">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(88, 166, 255, 0.15); color: var(--ai-related);">AI / ML</span>
+            </div>
+            <div class="track-name">Train Fabric JSON Model</div>
+            <div class="track-objective">Train AI model to understand yearbook layouts for custom generation.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+          
+          <div class="track-item">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(88, 166, 255, 0.15); color: var(--ai-related);">AI / ML</span>
+            </div>
+            <div class="track-name">AI Smart Templates</div>
+            <div class="track-objective">Serve custom generated layouts based on trained model + school variables.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+          
+          <div class="track-item">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(247, 129, 102, 0.15); color: var(--one-off);">One-off</span>
+            </div>
+            <div class="track-name">Page Design</div>
+            <div class="track-objective">Collaborative editing, layers panel, object manipulation improvements.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+          
+          <div class="track-item">
+            <div class="track-item-header">
+              <span class="track-drag-handle">⋮⋮</span>
+              <span class="track-category-badge" style="background: rgba(240, 193, 75, 0.15); color: var(--revenue);">Revenue</span>
+            </div>
+            <div class="track-name">Revenue Maker</div>
+            <div class="track-objective">Campus Capsule, OAC upsell, Your Years Galleries.</div>
+            <div class="track-item-actions">
+              <button class="btn-icon" title="Add task">+</button>
+              <button class="btn-icon" title="Edit">✎</button>
+              <button class="btn-icon" title="Delete">🗑</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Area -->
+      <div class="grid-area">
+        <div class="grid-header">
+          <div class="sprint-header">
+            <span class="quarter-badge">Q1</span>
+            <div class="sprint-number">S-199</div>
+            <div class="sprint-dates">Jan 12 – Feb 01</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-200</div>
+            <div class="sprint-dates">Feb 02 – Feb 22</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-201</div>
+            <div class="sprint-dates">Feb 23 – Mar 15</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-202</div>
+            <div class="sprint-dates">Mar 16 – Apr 05</div>
+          </div>
+          <div class="sprint-header">
+            <span class="quarter-badge">Q2</span>
+            <div class="sprint-number">S-203</div>
+            <div class="sprint-dates">Apr 06 – Apr 26</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-204</div>
+            <div class="sprint-dates">Apr 27 – May 17</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-205</div>
+            <div class="sprint-dates">May 18 – Jun 07</div>
+          </div>
+          <div class="sprint-header">
+            <div class="sprint-number">S-206</div>
+            <div class="sprint-dates">Jun 08 – Jun 28</div>
+          </div>
+        </div>
+        
+        <div class="grid-body">
+          <!-- Track 1: Bulk Analysis -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <div class="task-bar smart-img selected">
+                <span class="high-value">★</span>
+                Bulk Analysis
+              </div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img continuation">Bulk Analysis</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img continuation">Bulk Analysis</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">0F</span>
+                <span class="resource-badge be">1B</span>
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+          </div>
+          
+          <!-- Track 2: Vector Embedding -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img">Vector Embed v1</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">0F</span>
+                <span class="resource-badge be">1B</span>
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img continuation">Vector Embed v1</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img">Vector DB v2</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar smart-img continuation">Vector DB v2</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">0F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+          </div>
+          
+          <!-- Track 3: Train Model -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">
+                <span class="high-value">★</span>
+                Model v1
+              </div>
+              <div class="resource-row">
+                <span class="resource-badge ml">2M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Model v1</div>
+              <div class="resource-row">
+                <span class="resource-badge ml">2M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">Model v2</div>
+              <div class="resource-row">
+                <span class="resource-badge ml">2M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Model v2</div>
+              <div class="resource-row">
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">Model v3</div>
+              <div class="resource-row">
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Model v3</div>
+              <div class="resource-row">
+                <span class="resource-badge ml">1M</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+          </div>
+          
+          <!-- Track 4: AI Smart Templates -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">Template v1</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Template v1</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">
+                <span class="high-value">★</span>
+                Template v2
+              </div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Template v2</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">0B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related">Final</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar ai-related continuation">Final</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">0F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Track 5: Page Design -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <div class="task-bar one-off">
+                <span class="high-value">★</span>
+                Collab Edit
+              </div>
+              <div class="resource-row">
+                <span class="resource-badge fe">2F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off continuation">Collab Edit</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">2F</span>
+                <span class="resource-badge be">2B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off continuation">Collab Edit</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">2F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off continuation">Collab Edit</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off">Layers</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off">Objects</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off continuation">Objects</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar one-off">Pen Tool</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Track 6: Revenue -->
+          <div class="track-row">
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <button class="add-task-btn">+</button>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar" style="background: rgba(240, 193, 75, 0.15); border: 1px solid var(--revenue); color: var(--revenue);">OAC Upsell</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">1F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar" style="background: rgba(240, 193, 75, 0.15); border: 1px solid var(--revenue); color: var(--revenue);">
+                <span class="high-value">★</span>
+                Capsule
+              </div>
+              <div class="resource-row">
+                <span class="resource-badge fe">2F</span>
+                <span class="resource-badge be">2B</span>
+              </div>
+            </div>
+            <div class="grid-cell">
+              <div class="task-bar continuation" style="background: rgba(240, 193, 75, 0.15); border: 1px dashed var(--revenue); color: var(--revenue);">Capsule</div>
+              <div class="resource-row">
+                <span class="resource-badge fe">2F</span>
+                <span class="resource-badge be">1B</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side Panel (Task Editor) -->
+      <div class="side-panel">
+        <div class="panel-header">
+          <span class="panel-title">Edit Task</span>
+          <button class="btn-icon" onclick="hideSidePanel()">✕</button>
+        </div>
+        
+        <div class="panel-content">
+          <div class="form-group">
+            <label class="form-label">Task Name</label>
+            <input type="text" class="form-input" value="Bulk Analysis">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Short Name (for display)</label>
+            <input type="text" class="form-input" value="Bulk Analysis">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-input form-textarea">Scan all images upon upload with AWS Rekognition to store vector attributes and face vectors.</textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Sprint Range</label>
+            <div class="sprint-range">
+              <div class="sprint-select">
+                <select class="form-input">
+                  <option selected>S-199</option>
+                  <option>S-200</option>
+                  <option>S-201</option>
+                  <option>S-202</option>
+                </select>
+              </div>
+              <span style="color: var(--text-muted);">to</span>
+              <div class="sprint-select">
+                <select class="form-input">
+                  <option>S-199</option>
+                  <option>S-200</option>
+                  <option selected>S-201</option>
+                  <option>S-202</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Resource Allocation per Sprint</label>
+            <div class="resource-allocation">
+              <div class="resource-allocation-header">
+                <span style="width: 80px;"></span>
+                <span class="resource-sprint-label">S-199</span>
+                <span class="resource-sprint-label">S-200</span>
+                <span class="resource-sprint-label">S-201</span>
+              </div>
+              <div class="resource-allocation-row">
+                <span class="resource-type-label">
+                  <span class="resource-badge fe">F</span> Frontend
+                </span>
+                <input type="number" class="resource-input" value="1" min="0">
+                <input type="number" class="resource-input" value="1" min="0">
+                <input type="number" class="resource-input" value="0" min="0">
+              </div>
+              <div class="resource-allocation-row">
+                <span class="resource-type-label">
+                  <span class="resource-badge be">B</span> Backend
+                </span>
+                <input type="number" class="resource-input" value="1" min="0">
+                <input type="number" class="resource-input" value="1" min="0">
+                <input type="number" class="resource-input" value="1" min="0">
+              </div>
+              <div class="resource-allocation-row">
+                <span class="resource-type-label">
+                  <span class="resource-badge ml">M</span> ML
+                </span>
+                <input type="number" class="resource-input" value="0" min="0">
+                <input type="number" class="resource-input" value="1" min="0">
+                <input type="number" class="resource-input" value="1" min="0">
+              </div>
+              <div class="resource-allocation-row">
+                <span class="resource-type-label">
+                  <span class="resource-badge ux">U</span> UX/UI
+                </span>
+                <input type="number" class="resource-input" value="0" min="0">
+                <input type="number" class="resource-input" value="0" min="0">
+                <input type="number" class="resource-input" value="0" min="0">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-input">
+              <option>Planned</option>
+              <option selected>In Progress</option>
+              <option>Completed</option>
+              <option>Blocked</option>
+              <option>At Risk</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" class="checkbox" id="highValue" checked>
+              <label for="highValue" style="font-size: 13px;">High Value (show ★)</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel-footer">
+          <button class="btn btn-ghost" style="color: var(--accent-orange);">Delete</button>
+          <button class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Stats -->
+    <div class="footer-stats">
+      <div class="stat-item">
+        <span class="stat-value">18</span> Tracks
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">12</span> Sprints
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">45</span> Tasks
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">36</span> weeks
+      </div>
+      <div class="save-status">
+        <span class="save-dot"></span>
+        Auto-saved 2 minutes ago
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Track Modal -->
+  <div class="modal-overlay hidden" id="addTrackModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Add New Track</span>
+        <button class="btn-icon" onclick="hideAddTrackModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Track Name</label>
+          <input type="text" class="form-input" placeholder="e.g., Mobile Upload">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <div class="category-select">
+            <div class="category-option smart-img selected">Smart Image</div>
+            <div class="category-option ai-related">AI / ML</div>
+            <div class="category-option one-off">One-off</div>
+            <div class="category-option ongoing">Ongoing</div>
+            <div class="category-option revenue">Revenue</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Objective</label>
+          <textarea class="form-input form-textarea" placeholder="Describe the goal and business value of this track..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideAddTrackModal()">Cancel</button>
+        <button class="btn btn-primary">Add Track</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showAddTrackModal() {
+      document.getElementById('addTrackModal').classList.remove('hidden');
+    }
+    
+    function hideAddTrackModal() {
+      document.getElementById('addTrackModal').classList.add('hidden');
+    }
+    
+    function hideSidePanel() {
+      document.querySelector('.side-panel').classList.add('hidden');
+    }
+    
+    // Category selection in modal
+    document.querySelectorAll('.category-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.category-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+    
+    // Task selection
+    document.querySelectorAll('.task-bar').forEach(task => {
+      task.addEventListener('click', function() {
+        document.querySelectorAll('.task-bar').forEach(t => t.classList.remove('selected'));
+        this.classList.add('selected');
+        document.querySelector('.side-panel').classList.remove('hidden');
+      });
+    });
+    
+    // Legend filter toggle
+    document.querySelectorAll('.legend-item').forEach(item => {
+      item.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
