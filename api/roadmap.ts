@@ -4,6 +4,14 @@ export default async function handler(request: Request) {
     const url = new URL(request.url);
     const key = 'roadmap_data_v3';
 
+    if (!process.env['KV_REST_API_URL'] || !process.env['KV_REST_API_TOKEN']) {
+        console.error('Missing Vercel KV environment variables');
+        return new Response(JSON.stringify({
+            error: 'Missing Vercel KV environment variables',
+            details: 'Please connect a KV database in Vercel settings.'
+        }), { status: 500 });
+    }
+
     if (request.method === 'GET') {
         try {
             const data = await kv.get(key);
