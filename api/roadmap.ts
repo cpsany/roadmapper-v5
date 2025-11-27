@@ -1,10 +1,11 @@
 import { kv } from '@vercel/kv';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export const config = {
     runtime: 'nodejs',
 };
 
-export default async function handler(req, res) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
     const key = 'roadmap_data_v3';
 
     // Check Environment Variables

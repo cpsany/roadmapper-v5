@@ -40,6 +40,8 @@
     "@angular/build": "^20.3.12",
     "@angular/cli": "^20.3.12",
     "@angular/compiler-cli": "^20.3.14",
+    "@types/node": "^24.10.1",
+    "@vercel/node": "^5.5.13",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^3.1.1"
