@@ -1,43 +1,41 @@
 import { kv } from '@vercel/kv';
 
-export default async function handler(request: Request) {
-    const url = new URL(request.url);
+export const config = {
+    runtime: 'nodejs',
+};
+
+export default async function handler(req, res) {
     const key = 'roadmap_data_v3';
 
-    if (!process.env['KV_REST_API_URL'] || !process.env['KV_REST_API_TOKEN']) {
+    // Check Environment Variables
+    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
         console.error('Missing Vercel KV environment variables');
-        return new Response(JSON.stringify({
+        return res.status(500).json({
             error: 'Missing Vercel KV environment variables',
             details: 'Please connect a KV database in Vercel settings.'
-        }), { status: 500 });
+        });
     }
 
-    if (request.method === 'GET') {
+    if (req.method === 'GET') {
         try {
             const data = await kv.get(key);
-            return new Response(JSON.stringify(data || null), {
-                status: 200,
-                headers: { 'content-type': 'application/json' },
-            });
+            return res.status(200).json(data || null);
         } catch (error) {
             console.error('KV GET Error:', error);
-            return new Response(JSON.stringify({ error: 'Failed to load data', details: String(error) }), { status: 500 });
+            return res.status(500).json({ error: 'Failed to load data', details: String(error) });
         }
     }
 
-    if (request.method === 'POST') {
+    if (req.method === 'POST') {
         try {
-            const body = await request.json();
+            const body = req.body;
             await kv.set(key, body);
-            return new Response(JSON.stringify({ success: true }), {
-                status: 200,
-                headers: { 'content-type': 'application/json' },
-            });
+            return res.status(200).json({ success: true });
         } catch (error) {
             console.error('KV POST Error:', error);
-            return new Response(JSON.stringify({ error: 'Failed to save data', details: String(error) }), { status: 500 });
+            return res.status(500).json({ error: 'Failed to save data', details: String(error) });
         }
     }
 
-    return new Response('Method not allowed', { status: 405 });
+    return res.status(405).json({ error: 'Method not allowed' });
 }
