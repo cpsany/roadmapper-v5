@@ -24,7 +24,7 @@ import { RouterOutlet } from '@angular/router';
       <!-- Header -->
       <header class="header">
         <div class="logo">
-          <div class="logo-icon">R</div>
+          <div class="logo-icon">RM</div>
           Roadmap Maker
         </div>
         <div class="roadmap-selector">
