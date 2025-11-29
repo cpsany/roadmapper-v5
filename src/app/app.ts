@@ -50,7 +50,7 @@ import { RouterOutlet } from '@angular/router';
           <div class="legend-item"><span class="legend-dot ai-related"></span> AI / ML</div>
           <div class="legend-item"><span class="legend-dot one-off"></span> One-off</div>
           <div class="legend-item"><span class="legend-dot ongoing"></span> Ongoing</div>
-          <div class="legend-item"><span class="legend-dot ongoing"></span> Ongoing</div>
+
         </div>
         <div class="legend-section">
             <span class="legend-section-title">Properties</span>
