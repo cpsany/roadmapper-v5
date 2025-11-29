@@ -14,7 +14,9 @@ import { LucideAngularModule, Star } from 'lucide-angular';
            [ngClass]="[
              categoryId || '', 
              item.isHighValue ? 'high-value' : '',
-             isContinuation ? 'continuation' : ''
+             isContinuation ? 'continuation' : '',
+             continuesLeft ? 'continues-left' : '',
+             continuesRight ? 'continues-right' : ''
            ]"
            [attr.data-title]="item.title"
            [attr.data-desc]="item.description">
@@ -85,6 +87,30 @@ import { LucideAngularModule, Star } from 'lucide-angular';
       border-width: 1px;
     }
 
+    .task-bar.continues-left::before {
+      content: '';
+      position: absolute;
+      left: -12px; /* Extend to cover gap */
+      top: 50%;
+      width: 12px;
+      border-top: 2px dotted;
+      border-top-color: inherit; /* Match category color */
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+
+    .task-bar.continues-right::after {
+      content: '';
+      position: absolute;
+      right: -12px; /* Extend to cover gap */
+      top: 50%;
+      width: 12px;
+      border-top: 2px dotted;
+      border-top-color: inherit; /* Match category color */
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+
     .task-bar.high-value::after {
       /* content: ' ★'; Removed to avoid double star with icon */
     }
@@ -125,6 +151,8 @@ export class TimelineItemComponent {
   @Input() isStart = false;
   @Input() isEnd = false;
   @Input() isContinuation = false;
+  @Input() continuesLeft = false;
+  @Input() continuesRight = false;
 
   constructor() {
     // Register icons

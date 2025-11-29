@@ -36,7 +36,8 @@
                 <ng-container *ngFor="let item of getItemsForSprint(lane, sprint)">
                     <app-timeline-item [item]="item" [categoryId]="lane.categoryId"
                         [isStart]="isItemStart(item, sprint)" [isEnd]="isItemEnd(item, sprint)"
-                        [isContinuation]="!isItemStart(item, sprint)"
+                        [isContinuation]="!isItemStart(item, sprint)" [continuesLeft]="!isItemStart(item, sprint)"
+                        [continuesRight]="!isItemEnd(item, sprint)"
                         (click)="taskClick.emit({ item: item, laneId: lane.id })"
                         (mousedown)="onItemMouseDown($event, item, lane.id)">
                     </app-timeline-item>
