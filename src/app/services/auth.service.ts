@@ -17,7 +17,7 @@ export class AuthService {
 
     currentUser = signal<User | null>(this.loadUserFromStorage());
 
-    login(username: string) {
+    login(username: string, password?: string) {
         // For MVP, we simulate login by assigning a project ID based on username
         // In production, this would call /api/login
         const projectId = 'project-' + username.toLowerCase().replace(/[^a-z0-9]/g, '');

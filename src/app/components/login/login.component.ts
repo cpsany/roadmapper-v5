@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [CommonModule, FormsModule],
-    template: `
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `
     <div class="login-container">
       <div class="login-card">
         <div class="logo">
@@ -24,19 +24,30 @@ import { AuthService } from '../../services/auth.service';
               id="username" 
               [(ngModel)]="username" 
               name="username" 
-              placeholder="e.g. sandeep"
+              placeholder="username"
               required
               autofocus>
           </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              [(ngModel)]="password" 
+              name="password" 
+              placeholder="••••••••"
+              required>
+          </div>
           
-          <button type="submit" class="btn-primary" [disabled]="!username">
+          <button type="submit" class="btn-primary" [disabled]="!username || !password">
             Continue
           </button>
         </form>
       </div>
     </div>
   `,
-    styles: [`
+  styles: [`
     .login-container {
       height: 100vh;
       display: flex;
@@ -143,13 +154,14 @@ import { AuthService } from '../../services/auth.service';
   `]
 })
 export class LoginComponent {
-    private authService = inject(AuthService);
-    username = '';
+  private authService = inject(AuthService);
+  username = '';
+  password = '';
 
-    onSubmit(event: Event) {
-        event.preventDefault();
-        if (this.username.trim()) {
-            this.authService.login(this.username.trim());
-        }
+  onSubmit(event: Event) {
+    event.preventDefault();
+    if (this.username.trim() && this.password) {
+      this.authService.login(this.username.trim(), this.password);
     }
+  }
 }
