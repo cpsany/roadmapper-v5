@@ -6,6 +6,7 @@ import { ResourcePanelComponent } from '../resource-panel/resource-panel.compone
 import { ResourceToolbarComponent } from '../resource-toolbar/resource-toolbar.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { RoadmapService } from '../../services/roadmap.service';
+import { AuthService } from '../../services/auth.service';
 
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { TaskDetailPanelComponent } from '../task-detail-panel/task-detail-panel.component';
@@ -14,11 +15,11 @@ import { SettingsModalComponent } from '../settings-modal/settings-modal.compone
 import { TimelineItem } from '../../models/roadmap.model';
 
 @Component({
-    selector: 'app-roadmap',
-    standalone: true,
-    imports: [CommonModule, SidebarComponent, TimelineGridComponent, ResourcePanelComponent, ResourceToolbarComponent, ToolbarComponent, TaskDetailPanelComponent, AddTrackModalComponent,
-        SettingsModalComponent, LucideAngularModule],
-    template: `
+  selector: 'app-roadmap',
+  standalone: true,
+  imports: [CommonModule, SidebarComponent, TimelineGridComponent, ResourcePanelComponent, ResourceToolbarComponent, ToolbarComponent, TaskDetailPanelComponent, AddTrackModalComponent,
+    SettingsModalComponent, LucideAngularModule],
+  template: `
     <div class="app-container">
       <!-- Header -->
       <header class="header">
@@ -36,6 +37,13 @@ import { TimelineItem } from '../../models/roadmap.model';
           <button class="btn btn-secondary" (click)="openSettings()"><lucide-icon name="settings" [size]="14"></lucide-icon> Settings</button>
           <button class="btn btn-secondary"><lucide-icon name="download" [size]="14"></lucide-icon> Export</button>
           <button class="btn btn-primary"><lucide-icon name="check" [size]="14"></lucide-icon> Saved</button>
+          
+          <div class="user-profile" *ngIf="currentUser()">
+            <span class="username">{{ currentUser()?.username }}</span>
+            <button class="btn btn-ghost logout-btn" (click)="logout()" title="Logout">
+              <lucide-icon name="log-out" [size]="14"></lucide-icon>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -125,7 +133,7 @@ import { TimelineItem } from '../../models/roadmap.model';
       ></app-settings-modal>
     </div>
   `,
-    styles: [`
+  styles: [`
     .app-container {
       display: flex;
       flex-direction: column;
@@ -197,6 +205,32 @@ import { TimelineItem } from '../../models/roadmap.model';
       margin-left: auto;
       display: flex;
       gap: 8px;
+      align-items: center;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 12px;
+      border-left: 1px solid var(--border-color);
+      margin-left: 4px;
+    }
+
+    .username {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .logout-btn {
+      padding: 6px;
+      color: var(--text-muted);
+    }
+
+    .logout-btn:hover {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
     }
 
     .btn {
@@ -395,62 +429,69 @@ import { TimelineItem } from '../../models/roadmap.model';
   `]
 })
 export class RoadmapComponent {
-    private roadmapService = inject(RoadmapService);
+  private roadmapService = inject(RoadmapService);
+  private authService = inject(AuthService);
 
-    // Expose service for debugging
-    constructor() {
-        (window as any).roadmapService = this.roadmapService;
-    }
+  currentUser = this.authService.currentUser;
 
-    lanes = this.roadmapService.lanes;
-    roadmap = this.roadmapService.roadmap;
-    sprints = this.roadmapService.sprints;
-    settings = this.roadmapService.settings;
+  logout() {
+    this.authService.logout();
+  }
 
-    // Selection State
-    selectedItem = signal<TimelineItem | null>(null);
-    selectedLaneId = signal<string | null>(null);
-    showSettings = signal<boolean>(false);
+  // Expose service for debugging
+  constructor() {
+    (window as any).roadmapService = this.roadmapService;
+  }
 
-    openSettings() {
-        this.showSettings.set(true);
-    }
+  lanes = this.roadmapService.lanes;
+  roadmap = this.roadmapService.roadmap;
+  sprints = this.roadmapService.sprints;
+  settings = this.roadmapService.settings;
 
-    onTaskClick(event: { item: TimelineItem, laneId: string }) {
-        this.selectedItem.set(event.item);
-        this.selectedLaneId.set(event.laneId);
-    }
+  // Selection State
+  selectedItem = signal<TimelineItem | null>(null);
+  selectedLaneId = signal<string | null>(null);
+  showSettings = signal<boolean>(false);
 
-    closeDetailPanel() {
-        this.selectedItem.set(null);
-        this.selectedLaneId.set(null);
-    }
+  openSettings() {
+    this.showSettings.set(true);
+  }
 
-    // Add Track Modal State
-    showAddTrackModal = signal(false);
+  onTaskClick(event: { item: TimelineItem, laneId: string }) {
+    this.selectedItem.set(event.item);
+    this.selectedLaneId.set(event.laneId);
+  }
 
-    addTrack() {
-        this.showAddTrackModal.set(true);
-    }
+  closeDetailPanel() {
+    this.selectedItem.set(null);
+    this.selectedLaneId.set(null);
+  }
 
-    onSaveTrack(trackData: { name: string; category: string; categoryId: string; description: string }) {
-        this.roadmapService.addLane(trackData.name, trackData.category, trackData.categoryId, trackData.description);
-        this.showAddTrackModal.set(false);
-    }
+  // Add Track Modal State
+  showAddTrackModal = signal(false);
 
-    onCloseTrackModal() {
-        this.showAddTrackModal.set(false);
-    }
+  addTrack() {
+    this.showAddTrackModal.set(true);
+  }
 
-    getCategoryCount(category: string): number {
-        return this.lanes().filter(l => l.categoryId === category).length;
-    }
+  onSaveTrack(trackData: { name: string; category: string; categoryId: string; description: string }) {
+    this.roadmapService.addLane(trackData.name, trackData.category, trackData.categoryId, trackData.description);
+    this.showAddTrackModal.set(false);
+  }
 
-    getTotalTaskCount(): number {
-        return this.lanes().reduce((acc, lane) => acc + lane.items.length, 0);
-    }
+  onCloseTrackModal() {
+    this.showAddTrackModal.set(false);
+  }
 
-    getTotalWeeks(): number {
-        return this.sprints().length * this.settings().sprintDurationWeeks;
-    }
+  getCategoryCount(category: string): number {
+    return this.lanes().filter(l => l.categoryId === category).length;
+  }
+
+  getTotalTaskCount(): number {
+    return this.lanes().reduce((acc, lane) => acc + lane.items.length, 0);
+  }
+
+  getTotalWeeks(): number {
+    return this.sprints().length * this.settings().sprintDurationWeeks;
+  }
 }
