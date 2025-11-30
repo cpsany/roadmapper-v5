@@ -1,30 +1,30 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
+    selector: 'app-admin-login',
+    standalone: true,
+    imports: [CommonModule, FormsModule],
+    template: `
     <div class="login-container">
       <div class="login-card">
         <div class="logo">
-          <div class="logo-icon">RM</div>
-          <h1>Roadmap Maker</h1>
+          <div class="logo-icon admin">A</div>
+          <h1>Admin Portal</h1>
         </div>
-        <p class="subtitle">Enter your username to access your roadmap</p>
+        <p class="subtitle">Log in to manage users and projects</p>
         
         <form (submit)="onSubmit($event)">
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Admin Username</label>
             <input 
               type="text" 
               id="username" 
               [(ngModel)]="username" 
               name="username" 
-              placeholder="username"
               required
               autofocus>
           </div>
@@ -36,29 +36,17 @@ import { AuthService } from '../../services/auth.service';
               id="password" 
               [(ngModel)]="password" 
               name="password" 
-              placeholder="••••••••"
-              required>
-          </div>
-
-          <div class="form-group">
-            <label for="projectId">Project ID</label>
-            <input 
-              type="text" 
-              id="projectId" 
-              [(ngModel)]="projectId" 
-              name="projectId" 
-              placeholder="e.g. vision-2026"
               required>
           </div>
           
-          <button type="submit" class="btn-primary" [disabled]="!username || !password || !projectId">
-            Continue
+          <button type="submit" class="btn-primary" [disabled]="!username || !password">
+            Login as Admin
           </button>
         </form>
       </div>
     </div>
   `,
-  styles: [`
+    styles: [`
     .login-container {
       height: 100vh;
       display: flex;
@@ -90,7 +78,6 @@ import { AuthService } from '../../services/auth.service';
     .logo-icon {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, var(--ai-related), var(--smart-img));
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -98,6 +85,10 @@ import { AuthService } from '../../services/auth.service';
       font-weight: 700;
       font-size: 20px;
       color: var(--bg-primary);
+    }
+
+    .logo-icon.admin {
+        background: linear-gradient(135deg, #f78166, #d2a8ff);
     }
 
     h1 {
@@ -146,16 +137,16 @@ import { AuthService } from '../../services/auth.service';
       padding: 12px;
       border-radius: 6px;
       border: none;
-      background: var(--ai-related);
+      background: var(--text-primary);
       color: var(--bg-primary);
       font-weight: 600;
       font-size: 14px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: opacity 0.2s;
     }
 
     .btn-primary:hover {
-      background: #79b8ff;
+      opacity: 0.9;
     }
 
     .btn-primary:disabled {
@@ -164,16 +155,27 @@ import { AuthService } from '../../services/auth.service';
     }
   `]
 })
-export class LoginComponent {
-  private authService = inject(AuthService);
-  username = '';
-  password = '';
-  projectId = '';
+export class AdminLoginComponent {
+    private authService = inject(AuthService);
+    private router = inject(Router);
+    username = '';
+    password = '';
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    if (this.username.trim() && this.password && this.projectId.trim()) {
-      this.authService.login(this.username.trim(), this.password, this.projectId.trim());
+    onSubmit(event: Event) {
+        event.preventDefault();
+        if (this.username && this.password) {
+            this.authService.adminLogin(this.username, this.password).subscribe({
+                next: (res) => {
+                    if (res.success) {
+                        // Store admin token (mock)
+                        localStorage.setItem('admin_token', res.token);
+                        this.router.navigate(['/admin']);
+                    }
+                },
+                error: (err) => {
+                    alert('Admin Login Failed: ' + (err.error?.error || 'Unknown error'));
+                }
+            });
+        }
     }
-  }
 }

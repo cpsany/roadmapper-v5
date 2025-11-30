@@ -17,15 +17,35 @@ export class AuthService {
 
     currentUser = signal<User | null>(this.loadUserFromStorage());
 
-    login(username: string, password?: string) {
-        // For MVP, we simulate login by assigning a project ID based on username
-        // In production, this would call /api/login
-        const projectId = 'project-' + username.toLowerCase().replace(/[^a-z0-9]/g, '');
-        const user: User = { username, projectId };
+    login(username: string, password?: string, projectId?: string) {
+        if (!password || !projectId) {
+            console.error('Missing password or projectId');
+            return;
+        }
 
-        this.currentUser.set(user);
-        localStorage.setItem('roadmap_user', JSON.stringify(user));
-        this.router.navigate(['/']);
+        this.http.post<{ success: boolean, user: User }>('/api/login', { username, password, projectId })
+            .pipe(
+                tap(response => {
+                    if (response.success) {
+                        this.currentUser.set(response.user);
+                        localStorage.setItem('roadmap_user', JSON.stringify(response.user));
+                        this.router.navigate(['/']);
+                    }
+                }),
+                catchError(error => {
+                    console.error('Login failed', error);
+                    alert('Login failed: ' + (error.error?.error || 'Unknown error'));
+                    return of(null);
+                })
+            ).subscribe();
+    }
+
+    adminLogin(username: string, password?: string) {
+        return this.http.post<{ success: boolean, token: string }>('/api/admin/login', { username, password });
+    }
+
+    createUser(user: { username: string, password?: string, projectId: string }) {
+        return this.http.post('/api/admin/create-user', user);
     }
 
     logout() {
