@@ -1,5 +1,6 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 import { Roadmap, Lane, TimelineItem, Resource, RoadmapSettings, LaneCategory, Sprint } from '../models/roadmap.model';
 import { addDays, addWeeks, parseISO } from 'date-fns';
 import { interval, switchMap, catchError, of, filter, tap, Subject, debounceTime } from 'rxjs';
@@ -10,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class RoadmapService {
     private http = inject(HttpClient);
+    private authService = inject(AuthService);
 
     // State Signals
     private roadmapSignal = signal<Roadmap>(this.getDefaultData());
@@ -60,12 +62,16 @@ export class RoadmapService {
         // Polling for updates (every 10 seconds)
         interval(10000).pipe(
             takeUntilDestroyed(),
-            switchMap(() => this.http.get<Roadmap>('/api/roadmap').pipe(
-                catchError(err => {
-                    console.error('Polling error', err);
-                    return of(null);
-                })
-            )),
+            switchMap(() => {
+                const projectId = this.authService.projectId;
+                if (!projectId) return of(null);
+                return this.http.get<Roadmap>(`/api/roadmap?projectId=${projectId}`).pipe(
+                    catchError(err => {
+                        console.error('Polling error', err);
+                        return of(null);
+                    })
+                );
+            }),
             filter(data => !!data),
             tap(data => {
                 if (data) {
@@ -83,12 +89,16 @@ export class RoadmapService {
         this.saveSubject.pipe(
             takeUntilDestroyed(),
             debounceTime(1000), // Wait 1s after last change
-            switchMap(data => this.http.post('/api/roadmap', data).pipe(
-                catchError(err => {
-                    console.error('Save error', err);
-                    return of(null);
-                })
-            ))
+            switchMap(data => {
+                const projectId = this.authService.projectId;
+                if (!projectId) return of(null);
+                return this.http.post(`/api/roadmap?projectId=${projectId}`, data).pipe(
+                    catchError(err => {
+                        console.error('Save error', err);
+                        return of(null);
+                    })
+                );
+            })
         ).subscribe();
 
         // Auto-save effect (triggers saveSubject)
@@ -99,7 +109,10 @@ export class RoadmapService {
     }
 
     private loadData() {
-        this.http.get<Roadmap>('/api/roadmap').pipe(
+        const projectId = this.authService.projectId;
+        if (!projectId) return;
+
+        this.http.get<Roadmap>(`/api/roadmap?projectId=${projectId}`).pipe(
             catchError(err => {
                 console.error('Load error', err);
                 return of(null);

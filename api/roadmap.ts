@@ -9,7 +9,13 @@ export const config = {
 let redis: Redis | null = null;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    const key = 'roadmap_data_v3';
+    const projectId = Array.isArray(req.query['projectId']) ? req.query['projectId'][0] : req.query['projectId'];
+
+    if (!projectId) {
+        return res.status(400).json({ error: 'Missing projectId' });
+    }
+
+    const key = `roadmap_data:${projectId}`;
 
     // Check Environment Variables
     if (!process.env['REDIS_URL']) {
