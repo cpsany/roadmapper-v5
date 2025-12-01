@@ -83,7 +83,7 @@ import { TimelineItem } from '../../models/roadmap.model';
 
       <!-- Main Content -->
       <div class="content-wrapper">
-        <app-sidebar (addTrack)="addTrack()"></app-sidebar>
+        <app-sidebar (addTrack)="addTrack()" (editTrack)="onEditTrack($event)"></app-sidebar>
         
         <div class="main-content">
             <app-timeline-grid 
@@ -122,6 +122,7 @@ import { TimelineItem } from '../../models/roadmap.model';
 
     <app-add-track-modal
         *ngIf="showAddTrackModal()"
+        [track]="editingTrack()"
         (close)="onCloseTrackModal()"
         (save)="onSaveTrack($event)">
     </app-add-track-modal>
@@ -469,18 +470,36 @@ export class RoadmapComponent {
 
   // Add Track Modal State
   showAddTrackModal = signal(false);
+  editingTrack = signal<any>(null);
 
   addTrack() {
+    this.editingTrack.set(null);
     this.showAddTrackModal.set(true);
   }
 
-  onSaveTrack(trackData: { name: string; category: string; categoryId: string; description: string }) {
-    this.roadmapService.addLane(trackData.name, trackData.category, trackData.categoryId, trackData.description);
+  onEditTrack(track: any) {
+    this.editingTrack.set(track);
+    this.showAddTrackModal.set(true);
+  }
+
+  onSaveTrack(trackData: { id?: string; name: string; category: string; categoryId: string; description: string }) {
+    if (trackData.id) {
+      this.roadmapService.updateLane(trackData.id, {
+        name: trackData.name,
+        category: trackData.category,
+        categoryId: trackData.categoryId,
+        description: trackData.description
+      });
+    } else {
+      this.roadmapService.addLane(trackData.name, trackData.category, trackData.categoryId, trackData.description);
+    }
     this.showAddTrackModal.set(false);
+    this.editingTrack.set(null);
   }
 
   onCloseTrackModal() {
     this.showAddTrackModal.set(false);
+    this.editingTrack.set(null);
   }
 
   getCategoryCount(category: string): number {

@@ -2,6 +2,7 @@ import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoadmapService } from '../../services/roadmap.service';
 import { LucideAngularModule } from 'lucide-angular';
+import { Lane } from '../../models/roadmap.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -34,7 +35,7 @@ import { LucideAngularModule } from 'lucide-angular';
           
           <div class="track-item-actions">
             <button class="btn-icon" title="Add task" (click)="addItem(lane.id)">+</button>
-            <button class="btn-icon" title="Edit">✎</button>
+            <button class="btn-icon" title="Edit" (click)="editTrack.emit(lane)">✎</button>
             <button class="btn-icon" title="Delete" (click)="deleteLane(lane.id)">🗑</button>
           </div>
         </div>
@@ -200,6 +201,7 @@ export class SidebarComponent {
   lanes = this.roadmapService.lanes;
 
   @Output() addTrack = new EventEmitter<void>();
+  @Output() editTrack = new EventEmitter<Lane>();
 
   addLane() {
     // Handled by Toolbar
