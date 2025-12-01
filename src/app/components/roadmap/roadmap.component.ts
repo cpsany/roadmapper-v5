@@ -359,7 +359,7 @@ import { TimelineItem } from '../../models/roadmap.model';
         overflow-y: auto; /* Enable vertical scrolling for the entire wrapper */
         overflow-x: hidden;
         position: relative;
-        --timeline-header-height: 72px; /* Standardize header height */
+        --timeline-header-height: 88px; /* Standardize header height */
     }
 
     .main-content {
