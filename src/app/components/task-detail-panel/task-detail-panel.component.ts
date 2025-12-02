@@ -124,6 +124,15 @@ export class TaskDetailPanelComponent {
             resourceAllocation: newAllocation
         });
     }
+
+    incrementAllocation(sprintNum: number, roleId: string) {
+        const currentVal = this.getAllocation(sprintNum, roleId);
+        // Increment logic: 0 -> 1 -> 2 ...
+        // If it's a decimal (manual entry), round up to next integer? Or just add 1?
+        // Let's just add 1 for simplicity as requested "keep increment the value".
+        const newVal = Math.floor(currentVal) + 1;
+        this.updateAllocation(sprintNum, roleId, newVal);
+    }
     save() {
         if (this.editingItem()) {
             this.roadmapService.updateItem(this.laneId, this.item.id, this.editingItem()!);

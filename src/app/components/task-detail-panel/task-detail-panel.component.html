@@ -51,8 +51,9 @@
                     </div>
                     <div class="resource-sprint-column" *ngFor="let sNum of sprintRange">
                         <input type="number" [ngModel]="getAllocation(sNum, role.id)"
-                            (ngModelChange)="updateAllocation(sNum, role.id, $event)" class="resource-input" min="0"
-                            max="1" step="0.1" />
+                            (ngModelChange)="updateAllocation(sNum, role.id, $event)"
+                            (click)="incrementAllocation(sNum, role.id)" class="resource-input" min="0" max="10"
+                            step="1" />
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@
 
                 <!-- Render items that belong to this sprint -->
                 <ng-container *ngFor="let item of getItemsForSprint(lane, sprint)">
-                    <app-timeline-item [item]="item" [categoryId]="lane.categoryId"
+                    <app-timeline-item [item]="item" [categoryId]="lane.categoryId" [sprintNumber]="sprint.number"
                         [isStart]="isItemStart(item, sprint)" [isEnd]="isItemEnd(item, sprint)"
                         [isContinuation]="!isItemStart(item, sprint)" [continuesLeft]="!isItemStart(item, sprint)"
                         [continuesRight]="overlapsNextSprint(item, sIndex)"

@@ -26,13 +26,10 @@ import { LucideAngularModule, Star } from 'lucide-angular';
       </div>
       
       <div class="resource-row">
-        <!-- Show resources only on the start segment or if it's a long item? 
-             Mock shows resources on all segments, but sometimes 0F/0B.
-             Let's just show them all for now or mock the logic. -->
-        <span *ngIf="hasResource('FE')" class="resource-badge fe">1F</span>
-        <span *ngIf="hasResource('BE')" class="resource-badge be">1B</span>
-        <span *ngIf="hasResource('ML')" class="resource-badge ml">1M</span>
-        <span *ngIf="hasResource('UX')" class="resource-badge ux">1U</span>
+        <span *ngIf="hasAllocation('frontend')" class="resource-badge fe">{{ getAllocation('frontend') }}F</span>
+        <span *ngIf="hasAllocation('backend')" class="resource-badge be">{{ getAllocation('backend') }}B</span>
+        <span *ngIf="hasAllocation('ml')" class="resource-badge ml">{{ getAllocation('ml') }}M</span>
+        <span *ngIf="hasAllocation('ux')" class="resource-badge ux">{{ getAllocation('ux') }}U</span>
       </div>
     </div>
   `,
@@ -152,21 +149,14 @@ export class TimelineItemComponent {
   @Input() isEnd = false;
   @Input() isContinuation = false;
   @Input() continuesLeft = false;
-  @Input() continuesRight = false;
+  @Input() sprintNumber?: number;
 
-  constructor() {
-    // Register icons
-    // In newer lucide-angular, we might need to use the module pick in imports
-    // or provide icons.
-    // Let's try the imports approach in the decorator.
+  getAllocation(roleId: string): number {
+    if (!this.sprintNumber || !this.item.resourceAllocation) return 0;
+    return this.item.resourceAllocation[this.sprintNumber]?.[roleId] || 0;
   }
 
-  // Mock resource check
-  hasResource(type: string): boolean {
-    if (this.categoryId === 'smart-img') return ['FE', 'BE'].includes(type);
-    if (this.categoryId === 'ai-related') return ['ML'].includes(type);
-    if (this.categoryId === 'one-off') return ['FE'].includes(type);
-    if (this.categoryId === 'one-off') return ['FE'].includes(type);
-    return false;
+  hasAllocation(roleId: string): boolean {
+    return this.getAllocation(roleId) > 0;
   }
 }
