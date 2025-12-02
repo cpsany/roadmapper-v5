@@ -151,6 +151,8 @@ export class TimelineItemComponent {
   @Input() continuesLeft = false;
   @Input() sprintNumber?: number;
 
+
+
   getAllocation(roleId: string): number {
     if (!this.sprintNumber || !this.item.resourceAllocation) return 0;
     return this.item.resourceAllocation[this.sprintNumber]?.[roleId] || 0;
