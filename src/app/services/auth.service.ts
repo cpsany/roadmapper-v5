@@ -34,6 +34,17 @@ export class AuthService {
                 }),
                 catchError(error => {
                     console.error('Login failed', error);
+
+                    // FALLBACK FOR LOCAL DEV (when API is not running)
+                    if (error.status === 404) {
+                        console.warn('API not found (404), using local mock login');
+                        const mockUser: User = { username, projectId };
+                        this.currentUser.set(mockUser);
+                        localStorage.setItem('roadmap_user', JSON.stringify(mockUser));
+                        this.router.navigate(['/']);
+                        return of({ success: true, user: mockUser });
+                    }
+
                     alert('Login failed: ' + (error.error?.error || 'Unknown error'));
                     return of(null);
                 })

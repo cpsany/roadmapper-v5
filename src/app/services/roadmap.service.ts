@@ -95,6 +95,11 @@ export class RoadmapService {
                 return this.http.post(`/api/roadmap?projectId=${projectId}`, data).pipe(
                     catchError(err => {
                         console.error('Save error', err);
+                        // FALLBACK FOR LOCAL DEV
+                        if (err.status === 404) {
+                            localStorage.setItem(`roadmap_data_${projectId}`, JSON.stringify(data));
+                            return of(data);
+                        }
                         return of(null);
                     })
                 );
@@ -115,6 +120,15 @@ export class RoadmapService {
         this.http.get<Roadmap>(`/api/roadmap?projectId=${projectId}`).pipe(
             catchError(err => {
                 console.error('Load error', err);
+                // FALLBACK FOR LOCAL DEV
+                if (err.status === 404) {
+                    console.warn('API not found (404), using local storage');
+                    const stored = localStorage.getItem(`roadmap_data_${projectId}`);
+                    if (stored) {
+                        return of(JSON.parse(stored));
+                    }
+                    return of(this.getDefaultData());
+                }
                 return of(null);
             })
         ).subscribe(data => {

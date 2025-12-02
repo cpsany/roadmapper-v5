@@ -149,6 +149,7 @@ export class TimelineItemComponent {
   @Input() isEnd = false;
   @Input() isContinuation = false;
   @Input() continuesLeft = false;
+  @Input() continuesRight: boolean = false;
   @Input() sprintNumber?: number;
 
 
