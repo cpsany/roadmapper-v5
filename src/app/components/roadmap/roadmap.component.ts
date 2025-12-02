@@ -357,19 +357,24 @@ import { TimelineItem } from '../../models/roadmap.model';
     .content-wrapper {
         flex: 1;
         display: flex;
-        overflow-y: auto; /* Enable vertical scrolling for the entire wrapper */
-        overflow-x: hidden;
+        overflow: auto; /* Enable both X and Y scrolling */
         position: relative;
         --timeline-header-height: 88px; /* Standardize header height */
+    }
+
+    app-sidebar {
+        position: sticky;
+        left: 0;
+        z-index: 30;
     }
 
     .main-content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        overflow: visible; /* Allow content to expand */
+        overflow: visible;
         position: relative;
-        min-width: 0; /* Prevent flex overflow issues */
+        min-width: 0;
     }
 
     .roadmap-container {
@@ -381,10 +386,8 @@ import { TimelineItem } from '../../models/roadmap.model';
     }
 
     app-timeline-grid {
-      flex: 1;
-      overflow-x: auto; /* Allow horizontal scrolling */
-      overflow-y: visible; /* Let content-wrapper handle vertical scrolling */
-      /* Ensure grid takes available space */
+      /* Remove independent scrolling */
+      display: block;
     }
 
     /* Footer Stats */

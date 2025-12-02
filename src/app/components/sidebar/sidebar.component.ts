@@ -52,6 +52,7 @@ import { Lane } from '../../models/roadmap.model';
       flex-shrink: 0;
       height: auto; /* Allow height to grow */
       min-height: 100%;
+      z-index: 30;
     }
 
     .header {
