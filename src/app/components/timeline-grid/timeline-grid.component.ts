@@ -69,6 +69,22 @@ export class TimelineGridComponent {
     return isWithinInterval(itemEnd, { start: sprintStart, end: sprintEnd });
   }
 
+  overlapsNextSprint(item: TimelineItem, currentSprintIndex: number): boolean {
+    const nextSprint = this.sprints()[currentSprintIndex + 1];
+    if (!nextSprint) return false;
+
+    if (!item.startDate || !item.endDate) return false;
+    const itemStart = parseISO(item.startDate);
+    const itemEnd = parseISO(item.endDate);
+    const sprintStart = parseISO(nextSprint.start);
+    const sprintEnd = parseISO(nextSprint.end);
+
+    return areIntervalsOverlapping(
+      { start: itemStart, end: itemEnd },
+      { start: sprintStart, end: sprintEnd }
+    );
+  }
+
   // Editing State
   editingLaneId: string | null = null;
   tempLaneTitle = '';

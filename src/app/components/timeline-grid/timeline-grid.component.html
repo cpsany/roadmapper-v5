@@ -19,7 +19,7 @@
             <!-- Grid Cells -->
 
             <!-- Grid Cells -->
-            <div *ngFor="let sprint of sprints()" class="track-cell"
+            <div *ngFor="let sprint of sprints(); let sIndex = index" class="track-cell"
                 (mouseenter)="hoveredCell = { laneId: lane.id, sprintNumber: sprint.number }"
                 (mouseleave)="hoveredCell = null">
 
@@ -37,7 +37,7 @@
                     <app-timeline-item [item]="item" [categoryId]="lane.categoryId"
                         [isStart]="isItemStart(item, sprint)" [isEnd]="isItemEnd(item, sprint)"
                         [isContinuation]="!isItemStart(item, sprint)" [continuesLeft]="!isItemStart(item, sprint)"
-                        [continuesRight]="!isItemEnd(item, sprint)"
+                        [continuesRight]="overlapsNextSprint(item, sIndex)"
                         (click)="taskClick.emit({ item: item, laneId: lane.id })"
                         (mousedown)="onItemMouseDown($event, item, lane.id)">
                     </app-timeline-item>
