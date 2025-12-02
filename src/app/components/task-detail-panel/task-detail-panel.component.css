@@ -93,9 +93,16 @@
     gap: 12px;
 }
 
+.sprint-range-selector select {
+    flex: 1;
+    min-width: 0;
+    /* Prevent overflow */
+}
+
 .range-separator {
     color: var(--text-secondary);
     font-size: 14px;
+    flex-shrink: 0;
 }
 
 /* Resource Allocation (Prototype Match) */
