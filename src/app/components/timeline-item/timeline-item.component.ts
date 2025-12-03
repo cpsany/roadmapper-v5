@@ -9,20 +9,24 @@ import { LucideAngularModule, Star } from 'lucide-angular';
   imports: [CommonModule, LucideAngularModule],
   providers: [],
   template: `
-    <div class="task-cell">
+    <div class="task-cell" [class.mini]="isMiniView">
       <div class="task-bar" 
            [ngClass]="[
              categoryId || '', 
              item.isHighValue ? 'high-value' : '',
              isContinuation ? 'continuation' : '',
              continuesLeft ? 'continues-left' : '',
-             continuesRight ? 'continues-right' : ''
+             continuesRight ? 'continues-right' : '',
+             isMiniView ? 'mini-bar' : ''
            ]"
            [attr.data-title]="item.title"
            [attr.data-desc]="item.description">
-        {{ item.title }}
-        <lucide-icon *ngIf="item.isHighValue" name="star" [size]="12" class="star-icon"></lucide-icon>
-        <lucide-icon *ngIf="item.isRevenueMaker" name="dollar-sign" [size]="12" class="star-icon"></lucide-icon>
+        
+        <!-- Title: Always show, but style differently in Mini View -->
+        <span class="task-title" [class.mini-title]="isMiniView">{{ item.title }}</span>
+        
+        <lucide-icon *ngIf="item.isHighValue" name="star" [size]="10" class="star-icon"></lucide-icon>
+        <lucide-icon *ngIf="item.isRevenueMaker" name="dollar-sign" [size]="10" class="star-icon"></lucide-icon>
       </div>
       
       <div class="resource-row">
@@ -48,6 +52,10 @@ import { LucideAngularModule, Star } from 'lucide-angular';
       align-items: center;
     }
 
+    .task-cell.mini {
+        gap: 2px;
+    }
+
     .task-bar {
       width: calc(100% - 8px);
       padding: 6px 8px;
@@ -64,6 +72,46 @@ import { LucideAngularModule, Star } from 'lucide-angular';
       justify-content: center;
       position: relative;
       border: 1px solid transparent;
+    }
+
+    .task-bar.mini-bar {
+        min-height: 80px; /* Increased base height */
+        height: auto;
+        padding: 4px 2px;
+        font-size: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Ghost style for Mini View Continuation */
+    .task-bar.mini-bar.continuation {
+        background: transparent !important;
+        box-shadow: none !important;
+        min-height: 20px; /* Keep continuations small */
+        border-color: inherit; /* Ensure border color is visible */
+    }
+
+    /* Keep connection line visible even if bar is transparent */
+    .task-bar.mini-bar.continuation.continues-right::after {
+        border-top-style: dotted;
+        border-top-width: 2px;
+        /* Ensure color is inherited or set explicitly if needed */
+    }
+
+    .task-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .task-title.mini-title {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        white-space: nowrap;
+        max-height: 140px; /* Increased limit for longer titles */
+        max-width: none;
     }
 
     .task-bar:hover {
@@ -151,6 +199,14 @@ export class TimelineItemComponent {
   @Input() continuesLeft = false;
   @Input() continuesRight: boolean = false;
   @Input() sprintNumber?: number;
+  @Input() isMiniView = false;
+
+  // Template Logic
+  // In Mini View:
+  // - If Start: Show Title (truncated) + Resource Pills
+  // - If Continuation: Show ONLY Resource Pills
+  // - If End: Show ONLY Resource Pills (same as continuation)
+  // - Always show Resource Pills if allocated
 
 
 

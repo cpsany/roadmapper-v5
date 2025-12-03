@@ -1,6 +1,6 @@
 import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Map, Search, Plus, Minus, Settings } from 'lucide-angular';
+import { LucideAngularModule, Map, Search, Plus, Minus, Settings, Minimize2, Maximize2, Eye } from 'lucide-angular';
 import { RoadmapService } from '../../services/roadmap.service';
 
 @Component({
@@ -18,18 +18,16 @@ export class ToolbarComponent {
         this.addTrack.emit();
     }
 
-    zoomLevel = 100;
+    @Output() toggleMiniView = new EventEmitter<boolean>();
+    isMiniView = false;
 
     onSearch(event: any) {
         console.log('Search:', event.target.value);
     }
 
-    zoomIn() {
-        this.zoomLevel = Math.min(200, this.zoomLevel + 10);
-    }
-
-    zoomOut() {
-        this.zoomLevel = Math.max(50, this.zoomLevel - 10);
+    toggleView() {
+        this.isMiniView = !this.isMiniView;
+        this.toggleMiniView.emit(this.isMiniView);
     }
 
     toggleTheme() {

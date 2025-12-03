@@ -27,14 +27,17 @@
     <div class="toolbar-divider"></div>
 
     <!-- Right: Zoom & Theme -->
+    <!-- Right: View Toggle -->
     <div class="toolbar-group">
-        <button class="btn btn-ghost" (click)="zoomOut()">
-            <lucide-icon name="minus" [size]="14"></lucide-icon>
-        </button>
-        <span class="zoom-level">{{ zoomLevel }}%</span>
-        <button class="btn btn-ghost" (click)="zoomIn()">
-            <lucide-icon name="plus" [size]="14"></lucide-icon>
-        </button>
+        <div class="view-toggle" (click)="toggleView()">
+            <span class="toggle-label" [class.active]="isMiniView">Mini</span>
+            <div class="toggle-switch" [class.active]="!isMiniView">
+                <div class="toggle-slider">
+                    <lucide-icon name="eye" [size]="10"></lucide-icon>
+                </div>
+            </div>
+            <span class="toggle-label" [class.active]="!isMiniView">Full</span>
+        </div>
     </div>
 
     <div class="toolbar-divider"></div>

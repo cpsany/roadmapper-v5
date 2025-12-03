@@ -1,14 +1,14 @@
-<div class="roadmap" [style.grid-template-columns]="gridTemplateColumns()">
+<div class="roadmap" [style.grid-template-columns]="gridTemplateColumns">
     <!-- Timeline Header -->
     <div class="timeline-header">
         <!-- Timeline Header -->
         <div class="timeline-header">
             <!-- Corner removed as it's now in Sidebar -->
 
-            <div *ngFor="let sprint of sprints()" class="sprint-header">
+            <div *ngFor="let sprint of sprints()" class="sprint-header" [class.mini]="isMiniView">
                 <span class="quarter-badge" *ngIf="sprint.quarter">{{ sprint.quarter }}</span>
                 <div class="sprint-number">S-{{ sprint.number }}</div>
-                <div class="sprint-dates">
+                <div class="sprint-dates" *ngIf="!isMiniView">
                     {{ formatDate(sprint.start) }} – {{ formatDate(sprint.end) }}
                 </div>
             </div>
@@ -17,15 +17,13 @@
         <!-- Lanes -->
         <div *ngFor="let lane of lanes(); let i = index" class="track-row">
             <!-- Grid Cells -->
-
-            <!-- Grid Cells -->
             <div *ngFor="let sprint of sprints(); let sIndex = index" class="track-cell"
                 (mouseenter)="hoveredCell = { laneId: lane.id, sprintNumber: sprint.number }"
                 (mouseleave)="hoveredCell = null">
 
                 <!-- Ghost Add Button -->
                 <div class="cell-actions"
-                    *ngIf="hoveredCell?.laneId === lane.id && hoveredCell?.sprintNumber === sprint.number">
+                    *ngIf="!isMiniView && hoveredCell?.laneId === lane.id && hoveredCell?.sprintNumber === sprint.number">
                     <button class="btn-icon ghost-add" (click)="addTaskToSprint(lane.id, sprint, $event)"
                         title="Add Item to Sprint">
                         <lucide-icon name="plus" [size]="16"></lucide-icon>
@@ -37,7 +35,7 @@
                     <app-timeline-item [item]="item" [categoryId]="lane.categoryId" [sprintNumber]="sprint.number"
                         [isStart]="isItemStart(item, sprint)" [isEnd]="isItemEnd(item, sprint)"
                         [isContinuation]="!isItemStart(item, sprint)" [continuesLeft]="!isItemStart(item, sprint)"
-                        [continuesRight]="overlapsNextSprint(item, sIndex)"
+                        [continuesRight]="overlapsNextSprint(item, sIndex)" [isMiniView]="isMiniView"
                         (click)="taskClick.emit({ item: item, laneId: lane.id })"
                         (mousedown)="onItemMouseDown($event, item, lane.id)">
                     </app-timeline-item>

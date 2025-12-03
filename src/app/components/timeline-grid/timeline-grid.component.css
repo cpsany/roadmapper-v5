@@ -69,6 +69,29 @@
     white-space: nowrap;
 }
 
+/* Mini View Header Styles */
+.sprint-header.mini {
+    padding: 8px 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sprint-header.mini .sprint-number {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 11px;
+    white-space: nowrap;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.sprint-header.mini .quarter-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    margin-bottom: 8px;
+}
+
 .quarter-badge {
     display: inline-block;
     font-size: 10px;

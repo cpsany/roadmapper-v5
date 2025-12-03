@@ -47,38 +47,11 @@ import { TimelineItem } from '../../models/roadmap.model';
         </div>
       </header>
 
-      <app-toolbar (addTrack)="addTrack()"></app-toolbar>
+      <app-toolbar (addTrack)="addTrack()" (toggleMiniView)="toggleMiniView($event)"></app-toolbar>
 
       <!-- Legend Bar -->
       <div class="legend-bar">
-        <div class="legend-section">
-          <span class="legend-section-title">Categories</span>
-          <div class="legend-item"><span class="legend-dot smart-img"></span> Smart Image</div>
-          <div class="legend-item"><span class="legend-dot ai-related"></span> AI / ML</div>
-          <div class="legend-item"><span class="legend-dot one-off"></span> One-off</div>
-          <div class="legend-item"><span class="legend-dot ongoing"></span> Ongoing</div>
-
-        </div>
-        <div class="legend-section">
-            <span class="legend-section-title">Properties</span>
-            <div class="legend-item"><lucide-icon name="star" [size]="10"></lucide-icon> High Value</div>
-            <div class="legend-item"><lucide-icon name="dollar-sign" [size]="10"></lucide-icon> Revenue Maker</div>
-        </div>
-        <div class="legend-section">
-          <span class="legend-section-title">Resources</span>
-          <div class="resource-badge-legend">
-            <span class="fe">F</span> Frontend
-          </div>
-          <div class="resource-badge-legend">
-            <span class="be">B</span> Backend
-          </div>
-          <div class="resource-badge-legend">
-            <span class="ml">M</span> ML
-          </div>
-          <div class="resource-badge-legend">
-            <span class="ux">U</span> UX/UI
-          </div>
-        </div>
+        <!-- ... -->
       </div>
 
       <!-- Main Content -->
@@ -88,6 +61,7 @@ import { TimelineItem } from '../../models/roadmap.model';
         <div class="main-content">
             <app-timeline-grid 
               [roadmap]="roadmap()"
+              [isMiniView]="isMiniView()"
               (taskClick)="onTaskClick($event)"
               (addTrack)="addTrack()"
             ></app-timeline-grid>
@@ -459,6 +433,12 @@ export class RoadmapComponent {
 
   openSettings() {
     this.showSettings.set(true);
+  }
+
+  isMiniView = signal(false);
+
+  toggleMiniView(isMini: boolean) {
+    this.isMiniView.set(isMini);
   }
 
   onTaskClick(event: { item: TimelineItem, laneId: string }) {

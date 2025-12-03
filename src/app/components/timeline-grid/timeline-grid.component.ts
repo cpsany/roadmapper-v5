@@ -23,10 +23,14 @@ export class TimelineGridComponent {
   lanes = this.roadmapService.lanes;
   sprints = this.roadmapService.sprints;
 
-  gridTemplateColumns = computed(() => {
+  @Input() isMiniView = false;
+
+  get gridTemplateColumns(): string {
     const sprintCount = this.sprints().length;
-    return `repeat(${sprintCount}, var(--sprint-width))`;
-  });
+    // Use minmax to ensure columns are at least 30px but expand to fill available space
+    const width = this.isMiniView ? 'minmax(30px, 1fr)' : 'var(--sprint-width)';
+    return `repeat(${sprintCount}, ${width})`;
+  }
 
   formatDate(iso: string): string {
     const d = parseISO(iso);
