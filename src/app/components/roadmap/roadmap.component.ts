@@ -56,7 +56,7 @@ import { TimelineItem } from '../../models/roadmap.model';
 
       <!-- Main Content -->
       <div class="content-wrapper">
-        <app-sidebar (addTrack)="addTrack()" (editTrack)="onEditTrack($event)"></app-sidebar>
+        <app-sidebar [isMiniView]="isMiniView()" (addTrack)="addTrack()" (editTrack)="onEditTrack($event)"></app-sidebar>
         
         <div class="main-content">
             <app-timeline-grid 

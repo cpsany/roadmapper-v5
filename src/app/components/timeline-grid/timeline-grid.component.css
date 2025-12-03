@@ -264,6 +264,12 @@
     padding: 8px 4px;
 }
 
+/* Force fixed height in Mini View to match Sidebar */
+.roadmap[style*="minmax"] .track-cell {
+    height: 150px;
+    min-height: 150px;
+}
+
 .track-cell:last-child {
     border-right: 1px solid var(--bg-tertiary);
 }

@@ -5,6 +5,7 @@ import { Roadmap, Lane, TimelineItem, Resource, RoadmapSettings, LaneCategory, S
 import { addDays, addWeeks, parseISO } from 'date-fns';
 import { interval, switchMap, catchError, of, filter, tap, Subject, debounceTime } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MOCK_ROADMAP_DATA } from './mock-data';
 
 @Injectable({
     providedIn: 'root'
@@ -139,39 +140,7 @@ export class RoadmapService {
     }
 
     private getDefaultData(): Roadmap {
-        // Default Categories
-        const categories: LaneCategory[] = [
-            { id: 'smart-img', name: 'Smart Image', color: '#3fb950', bgColor: 'rgba(63, 185, 80, 0.15)', order: 1 },
-            { id: 'ai-related', name: 'AI / ML', color: '#58a6ff', bgColor: 'rgba(88, 166, 255, 0.15)', order: 2 },
-            { id: 'one-off', name: 'One-off', color: '#f78166', bgColor: 'rgba(247, 129, 102, 0.15)', order: 3 },
-            { id: 'ongoing', name: 'Ongoing', color: '#a371f7', bgColor: 'rgba(163, 113, 247, 0.15)', order: 4 },
-        ];
-
-        // Default Settings
-        const settings: RoadmapSettings = {
-            sprintPrefix: 'S-',
-            sprintStartNumber: 199,
-            sprintDurationWeeks: 3,
-            sprintStartDate: '2026-01-12T00:00:00.000Z',
-            numberOfSprints: 12,
-            showQuarterMarkers: true,
-            showResourceTotals: true,
-            theme: 'dark',
-            categories
-        };
-
-        const lanes: Lane[] = [];
-
-        return {
-            id: crypto.randomUUID(),
-            title: 'Vision 2026 Roadmap',
-            description: 'Varsity Yearbook — eDesign Platform Evolution',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            settings,
-            lanes,
-            resources: []
-        };
+        return MOCK_ROADMAP_DATA;
     }
 
     // Actions

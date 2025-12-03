@@ -109,9 +109,13 @@ import { LucideAngularModule, Star } from 'lucide-angular';
         writing-mode: vertical-rl;
         text-orientation: mixed;
         transform: rotate(180deg);
-        white-space: nowrap;
-        max-height: 140px; /* Increased limit for longer titles */
+        white-space: normal; /* Allow wrapping */
+        word-break: break-word; /* Force break long words */
+        hyphens: auto; /* Add hyphens if supported */
+        max-height: 100px; /* Reduced to fit in 150px cell with resources */
         max-width: none;
+        line-height: 1.1; /* Tighter line height for vertical text */
+        text-align: center;
     }
 
     .task-bar:hover {

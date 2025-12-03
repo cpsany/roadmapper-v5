@@ -1,4 +1,4 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoadmapService } from '../../services/roadmap.service';
 import { LucideAngularModule } from 'lucide-angular';
@@ -23,7 +23,7 @@ import { Lane } from '../../models/roadmap.model';
       </div>
       
       <div class="track-list">
-        <div *ngFor="let lane of lanes()" class="track-item" [class.selected]="false">
+        <div *ngFor="let lane of lanes()" class="track-item" [class.selected]="false" [class.mini-track]="isMiniView">
           <div class="track-item-header">
             <span class="track-drag-handle">⋮⋮</span>
             <span class="track-category-badge" [ngClass]="getCategoryClass(lane.category)">
@@ -90,6 +90,15 @@ import { Lane } from '../../models/roadmap.model';
       position: relative;
       height: 88px; /* Fixed height to match Grid */
       box-sizing: border-box;
+      background: var(--bg-primary); /* Default to dark (primary) to match Grid base */
+    }
+
+    .track-item:nth-child(odd) {
+      background: var(--bg-secondary); /* Alternating lighter (secondary) */
+    }
+
+    .track-item.mini-track {
+        height: 150px; /* Increased height for Mini View vertical tasks */
     }
 
     .track-item:hover {
@@ -200,6 +209,8 @@ import { Lane } from '../../models/roadmap.model';
 export class SidebarComponent {
   private roadmapService = inject(RoadmapService);
   lanes = this.roadmapService.lanes;
+
+  @Input() isMiniView = false;
 
   @Output() addTrack = new EventEmitter<void>();
   @Output() editTrack = new EventEmitter<Lane>();

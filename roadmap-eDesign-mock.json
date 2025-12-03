@@ -1,0 +1,1227 @@
+{
+    "id": "e129ce3d-1e05-4f9a-a368-1f3e3760e919",
+    "title": "Vision 2026 Roadmap",
+    "description": "Varsity Yearbook — eDesign Platform Evolution",
+    "createdAt": "2025-11-29T02:47:31.188Z",
+    "updatedAt": "2025-12-03T02:30:17.577Z",
+    "settings": {
+        "sprintPrefix": "S-",
+        "sprintStartNumber": 199,
+        "sprintDurationWeeks": 3,
+        "sprintStartDate": "2026-01-12T00:00:00.000Z",
+        "numberOfSprints": 20,
+        "showQuarterMarkers": true,
+        "showResourceTotals": true,
+        "theme": "dark",
+        "categories": [
+            {
+                "id": "smart-img",
+                "name": "Smart Image",
+                "color": "#3fb950",
+                "bgColor": "rgba(63, 185, 80, 0.15)",
+                "order": 1
+            },
+            {
+                "id": "ai-related",
+                "name": "AI / ML",
+                "color": "#58a6ff",
+                "bgColor": "rgba(88, 166, 255, 0.15)",
+                "order": 2
+            },
+            {
+                "id": "one-off",
+                "name": "One-off",
+                "color": "#f78166",
+                "bgColor": "rgba(247, 129, 102, 0.15)",
+                "order": 3
+            },
+            {
+                "id": "ongoing",
+                "name": "Ongoing",
+                "color": "#a371f7",
+                "bgColor": "rgba(163, 113, 247, 0.15)",
+                "order": 4
+            }
+        ]
+    },
+    "lanes": [
+        {
+            "id": "72939578-c8aa-4a56-8b8e-94ec6ec28aa4",
+            "name": "Candid bulk analysis ",
+            "category": "Smart Image",
+            "categoryId": "smart-img",
+            "description": "Scanning all images upon upload and storing vector attributes as well as face vectors/info will provide the foundation we need for features like revamped library tagging/searching; filters/targeted image suggestions based on images containing certain people; smart PDLPs that autoserve the content we think you want, and a down-the-road “build my book” concept. Will also help us offer dynamic Send and Sell campaigns based on pages being submitted and who’s on those pages.",
+            "order": 2,
+            "items": [
+                {
+                    "title": "Candid Bulk Analysis with AWS",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-04-04T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "9a3bef8c-99ab-4b3f-950d-dc8cbb5a2125",
+                    "resourceAllocation": {
+                        "199": {
+                            "frontend": 0,
+                            "backend": 1
+                        },
+                        "200": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "201": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Candid bulk analysis with AWS rekognition: Scanning all images upon upload and storing vector attributes as well as face vectors/info will provide the foundation we need for features like revamped library tagging/searching; filters/targeted image suggestions based on images containing certain people; smart PDLPs that autoserve the content we think you want, and a down-the-road “build my book” concept. Will also help us offer dynamic Send and Sell campaigns based on pages being submitted and who’s on those pages."
+                }
+            ]
+        },
+        {
+            "id": "c30fc570-914f-4308-a2d2-4762cde0cc95",
+            "name": "Train a model with Fabric JSON ",
+            "category": "AI / ML",
+            "categoryId": "ai-related",
+            "description": "Training an AI model to understand yearbook layouts will help us offer AI-generated, custom layouts + alternate layout suggestions; a revamped concept of the Catalog; a design assistant that can offer critiques/suggestions for improvement; and a down-the-road “build my book” concept.",
+            "order": 2,
+            "items": [
+                {
+                    "title": "Train JSON Model - POC",
+                    "startDate": "2026-02-02T00:00:00.000Z",
+                    "endDate": "2026-04-04T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "65be6755-d2cd-4bda-b5cc-8161d20c6556",
+                    "resourceAllocation": {
+                        "200": {
+                            "backend": 1,
+                            "ml": 1
+                        },
+                        "201": {
+                            "backend": 1,
+                            "ml": 1
+                        },
+                        "202": {
+                            "backend": 1,
+                            "ml": 1
+                        }
+                    },
+                    "isHighValue": true,
+                    "description": "Training an AI model to understand yearbook layouts will help us offer AI-generated, custom layouts + alternate layout suggestions; a revamped concept of the Catalog; a design assistant that can offer critiques/suggestions for improvement; and a down-the-road “build my book” concept.",
+                    "shortName": "JSON Training"
+                },
+                {
+                    "title": "Train JSON - Implementation",
+                    "startDate": "2026-04-05T23:00:00.000Z",
+                    "endDate": "2026-06-06T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "0cb6a479-b6a7-4669-abec-dc0869cc5035",
+                    "resourceAllocation": {
+                        "203": {
+                            "backend": 1,
+                            "ml": 1,
+                            "frontend": 0
+                        }
+                    },
+                    "isHighValue": true
+                }
+            ]
+        },
+        {
+            "id": "6d639f2b-7a9d-4f64-a541-f3fc33bdac19",
+            "name": "AI Smart Template",
+            "category": "AI / ML",
+            "categoryId": "ai-related",
+            "description": "Train a model with Fabric JSON template: Training an AI model to understand yearbook layouts will help us offer AI-generated, custom layouts + alternate layout suggestions; a revamped concept of the Catalog; a design assistant that can offer critiques/suggestions for improvement; and a down-the-road “build my book” concept.",
+            "order": 3,
+            "items": [
+                {
+                    "title": "Smart Template V1- MVP for AI template",
+                    "startDate": "2026-03-15T23:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "40bd7a28-9954-49c7-a556-e2ff3759853f",
+                    "resourceAllocation": {
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1,
+                            "ml": 0
+                        },
+                        "203": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "isHighValue": true,
+                    "description": "V1 focuses on output of \"can you build a good journalistic sports layout for me\" or \"build me a cute scrapbook collage\""
+                },
+                {
+                    "title": "Smart Template V2 - Prefer Attributes",
+                    "startDate": "2026-05-17T23:00:00.000Z",
+                    "endDate": "2026-08-08T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "a39ddba6-28e6-497d-902d-a0b0f3d5b253",
+                    "resourceAllocation": {
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "shortName": "Customized AI layouts",
+                    "description": "Harnessing specified fonts, colors, and graphics, we push harder to build even more specified content for individual customers. This work also paves the way for an upsell in parent ads."
+                },
+                {
+                    "title": "Smart Template Final",
+                    "startDate": "2026-08-09T23:00:00.000Z",
+                    "endDate": "2026-09-19T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "d5140420-d739-41ca-b16c-1d1b63be4629",
+                    "resourceAllocation": {
+                        "209": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "210": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "shortName": "Smart Template Command Center",
+                    "description": "Bring it together to let schools say:\n1: Here's my style of book (and a few visuals they can say 'yeah like this')\n2: I've indicated the colors/fonts/graphics I want\n3: You can look in my library or at pages in my ladder\n\nUsing allll of this information, make me custom layouts."
+                }
+            ]
+        },
+        {
+            "id": "89c5dcff-bc87-40af-978b-b5d7acf6a0a0",
+            "name": "Page Design",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "TBD",
+            "order": 4,
+            "items": [
+                {
+                    "title": "Collaborative multi user page edit",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "c5e9d05f-1087-479f-8ba5-f9623392a447",
+                    "resourceAllocation": {
+                        "199": {
+                            "backend": 2,
+                            "frontend": 1
+                        },
+                        "200": {
+                            "backend": 2,
+                            "frontend": 1
+                        },
+                        "201": {
+                            "backend": 2,
+                            "frontend": 1
+                        },
+                        "202": {
+                            "backend": 2,
+                            "frontend": 1
+                        }
+                    },
+                    "description": "Overhaul concept of page locks and save behavior and move to a more modern/intuitive page design editing concept that allows multiple users to be on the same page at the same time."
+                },
+                {
+                    "title": "Layers Panel",
+                    "startDate": "2026-05-17T23:00:00.000Z",
+                    "endDate": "2026-06-27T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "3a1f297f-d489-46a3-ac44-f9a7f7169196",
+                    "resourceAllocation": {
+                        "205": {
+                            "frontend": 1,
+                            "backend": null
+                        },
+                        "206": {
+                            "frontend": 1
+                        }
+                    },
+                    "shortName": "Layers Panel",
+                    "description": "Expose all elements on the page via a layers panel to allow better manipulation of those elements and easy visibility into everything the layout contains."
+                },
+                {
+                    "title": "Object Manipulation",
+                    "startDate": "2026-06-28T23:00:00.000Z",
+                    "endDate": "2026-08-08T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "7e55f734-5f4a-40e7-b61d-bef6213822b5",
+                    "resourceAllocation": {
+                        "207": {
+                            "frontend": 1
+                        },
+                        "208": {
+                            "frontend": 1
+                        }
+                    },
+                    "description": " Expose all elements on the page via a layers panel to allow better manipulation of those elements and easy visibility into everything the layout contains.",
+                    "shortName": "Object Manipulation"
+                },
+                {
+                    "title": "Pen Tool",
+                    "startDate": "2026-08-09T23:00:00.000Z",
+                    "endDate": "2026-10-31T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "635ae140-4e7a-412a-a0c2-9bdc2651c78c",
+                    "resourceAllocation": {
+                        "209": {
+                            "frontend": 1
+                        },
+                        "210": {
+                            "frontend": 1
+                        },
+                        "211": {
+                            "frontend": 1
+                        },
+                        "212": {
+                            "frontend": 1
+                        }
+                    },
+                    "description": "Pen tool: Implement the ability to draw curved shapes natively in eDesign to allow sophisticated users access to an ability that has kept them using InDesign."
+                },
+                {
+                    "title": "Eye Dropper",
+                    "startDate": "2026-11-02T00:00:00.000Z",
+                    "endDate": "2026-11-22T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "bbc2cb05-1b58-4a9f-bb5c-2113f4d284fd",
+                    "resourceAllocation": {
+                        "213": {
+                            "frontend": 1,
+                            "backend": null
+                        }
+                    },
+                    "description": "Pen tool: Implement the ability to draw curved shapes natively in eDesign to allow sophisticated users access to an ability that has kept them using InDesign."
+                }
+            ]
+        },
+        {
+            "id": "cc7a4827-c4a8-4112-bb05-53c5ff947025",
+            "name": "Vector embedded Candid images",
+            "category": "Smart Image",
+            "categoryId": "smart-img",
+            "description": "Will provide the foundation for revamped tagging/searching of pics and our ability to auto detect the pics we think folks want for any spread/topic; opens the functionality of Collage Wizard into more of a real book builder, eventually.",
+            "order": 5,
+            "items": [
+                {
+                    "title": "Candid vector embedding v1",
+                    "startDate": "2026-03-15T23:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "5c592342-c29d-4e8c-bb9d-0e286478dd92",
+                    "resourceAllocation": {
+                        "202": {
+                            "frontend": 0,
+                            "backend": 1,
+                            "ml": 1
+                        },
+                        "203": {
+                            "frontend": 0,
+                            "backend": 1,
+                            "ml": 1
+                        },
+                        "204": {
+                            "frontend": 0,
+                            "backend": 1,
+                            "ml": 1
+                        }
+                    },
+                    "isHighValue": true,
+                    "description": "Vector DB for candid pics: Will provide the foundation for revamped tagging/searching of pics and our ability to auto detect the pics we think folks want for any spread/topic; opens the functionality of Collage Wizard into more of a real book builder, eventually."
+                },
+                {
+                    "title": "Vector DB embedding candid pics v2",
+                    "startDate": "2026-05-17T23:00:00.000Z",
+                    "endDate": "2026-07-18T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "81bf24fa-7f46-4db6-8a3e-da91fbf80743",
+                    "resourceAllocation": {
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Vector DB for candid pics: Will provide the foundation for revamped tagging/searching of pics and our ability to auto detect the pics we think folks want for any spread/topic; opens the functionality of Collage Wizard into more of a real book builder, eventually."
+                }
+            ]
+        },
+        {
+            "id": "b5e625f9-e12a-483f-9fa8-d3ce1d563f69",
+            "name": "Smart Tagging Page Content + Sales Bridge",
+            "category": "Smart Image",
+            "categoryId": "smart-img",
+            "description": "Smart Scan: Harness bulk scan and a simplified interface to present everyone we detect on a page in an image (for tagging for IB/CR) and then Smart Submit: Using smart scan data, generate Send and Sell campaign to the parental contacts of everyone we detect on each submitted page. Start with ready-made messages that rep/adviser just needs to send, and build to an auto-fired system that schools opt in to automatically.",
+            "order": 6,
+            "items": [
+                {
+                    "title": "Page level tagging interface",
+                    "startDate": "2026-03-15T23:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "a72e8231-7020-4e30-9ccb-2365ffae5a44",
+                    "resourceAllocation": {
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "203": {
+                            "frontend": 1,
+                            "backend": 1,
+                            "ml": null
+                        },
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1,
+                            "ml": null
+                        }
+                    },
+                    "description": "Smart Scan: Harness bulk scan and a simplified interface to present everyone we detect on a page in an image (for tagging for IB/CR, and as the conduit to auto Send and Sell campaigns based on who's in the pics."
+                },
+                {
+                    "title": "Smart Campaigns",
+                    "startDate": "2026-05-17T23:00:00.000Z",
+                    "endDate": "2026-08-08T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "0f4e4d87-035a-4b41-a7cf-b4c893b98e65",
+                    "resourceAllocation": {
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Break apart send and sell so that it can house a dashboard of single-click messages to parents of kids on submitted pages who haven't bought the book.",
+                    "isRevenueMaker": true,
+                    "isHighValue": true
+                },
+                {
+                    "title": "PDLP Smart Serve",
+                    "startDate": "2026-08-09T23:00:00.000Z",
+                    "endDate": "2026-09-19T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "dccb7ecc-8235-4f18-9101-f4c9c4a05d2d",
+                    "resourceAllocation": {
+                        "209": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "210": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Opening PDLP Candids library and it will autopopulate with the pics we think you probably want for this topic. \n\nWill make visible a filter for “pics with people I should use” (bulk scan will let us serve pics of people who aren’t yet in the book enough to try to improve coverage)"
+                }
+            ]
+        },
+        {
+            "id": "3e73be93-6158-4b15-8f4c-c8d40b2b7390",
+            "name": "Library and Tagging Experience",
+            "category": "Smart Image",
+            "categoryId": "smart-img",
+            "description": "We need to revamp the library experience to better harness the vector DB.",
+            "order": 7,
+            "items": [
+                {
+                    "title": "Library UI/UX - Refinement Panel",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-02-22T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "60147d7d-8c0f-4d76-b261-0e28ac209cae",
+                    "resourceAllocation": {
+                        "199": {
+                            "ux": 1
+                        },
+                        "200": {
+                            "ux": 1
+                        },
+                        "201": {
+                            "ux": 1,
+                            "frontend": null
+                        }
+                    },
+                    "description": "We need to smash the library UI so that it looks modern and assets can be found intuitively. Vector DB will help us under the covers with this, but I'd love a pro who is good at this to help envision what we could do with the library."
+                },
+                {
+                    "title": "Refinement Panel",
+                    "startDate": "2026-02-23T00:00:00.000Z",
+                    "endDate": "2026-04-25T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "779901de-038d-41e6-8f1b-b99b723240dd",
+                    "resourceAllocation": {
+                        "201": {
+                            "frontend": 1
+                        },
+                        "202": {
+                            "frontend": 1,
+                            "backend": 0,
+                            "ml": 0
+                        },
+                        "203": {
+                            "frontend": 1
+                        },
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Refinement panel: We need more visible and intuitive image searching & filters to harness the new vector attributes + the notepad, and we need a more dynamic display of returned assets. "
+                },
+                {
+                    "title": "Candids Notepad",
+                    "startDate": "2026-04-26T23:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "24734c7e-86e7-4397-8369-5f6c410e3366",
+                    "resourceAllocation": {
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "shortName": "Candids Notepad",
+                    "description": "Freeform system for notes, quotes, data - anything users want to store/search for photo/s. Necessary to play with how it will work when the vector DB comes alive."
+                },
+                {
+                    "title": "Refinement Panel V2",
+                    "startDate": "2026-05-17T23:00:00.000Z",
+                    "endDate": "2026-06-27T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "8fa38297-479d-424d-9ce2-cfbb9e9f671b",
+                    "resourceAllocation": {
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Incorporates original RP based off of vector output with the user's custom Notepad - more filters/search"
+                },
+                {
+                    "title": "Candid Cleanup",
+                    "startDate": "2026-11-23T00:00:00.000Z",
+                    "endDate": "2027-01-24T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "smart-img",
+                    "id": "1dac9dc8-4408-46f3-a459-d86fcb37772a",
+                    "resourceAllocation": {
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "214": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "215": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "216": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Find dupes, best of the bunch, unusable (based on blurry or terrible resolution), potential content moderation."
+                }
+            ]
+        },
+        {
+            "id": "1f77cdd9-14b9-4fc5-a76e-5e6094ff766c",
+            "name": "On Demand AI Assistant 'Q'",
+            "category": "AI / ML",
+            "categoryId": "ai-related",
+            "description": "A Settings controlled feature that is accessible throughout the app as a “help me” assistant. To start, it will help provide text brainstorms & proofing. It will also be an “on demand” help resource bank of knowledge, including data points like “when are my deadlines” and “how many books have I sold thus far”? MVP focus is on text brainstorms, but the possibilities for more are significant.",
+            "order": 8,
+            "items": [
+                {
+                    "title": "Chatbot Asst Foundation",
+                    "startDate": "2026-02-23T00:00:00.000Z",
+                    "endDate": "2026-05-16T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "ad6d9d92-37ab-46a5-89b2-aa870e0d8bbb",
+                    "resourceAllocation": {
+                        "201": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "203": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "A Settings controlled feature that is accessible throughout the app as a “help me” assistant. To start, it will help provide text brainstorms & proofing. It will also be an “on demand” help resource bank of knowledge, including data points like “when are my deadlines” and “how many books have I sold thus far”? MVP focus is on text brainstorms, but the possibilities for more are significant."
+                }
+            ]
+        },
+        {
+            "id": "aaacfa03-e545-4b12-b178-af5653252ffb",
+            "name": "Mobile Upload Experience",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "Build a better bridge from phones to eDesign libraries in a way that captures metadata so the images will be found. Potentially easy one off.",
+            "order": 9,
+            "items": []
+        },
+        {
+            "id": "ca08ab36-082c-43df-bd68-11787e5cef33",
+            "name": "PDF Image Optimization ",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "The goal of this initiative is to try targeted improvements to reduce our PDF sizes, ultimately so that the support team doesn't need to touch 5% of all submissions.",
+            "order": 10,
+            "items": [
+                {
+                    "title": "PDF Optimization - Crop Images",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-06-06T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "8674cab8-1a20-4a2f-88ae-42ab877b1151",
+                    "resourceAllocation": {
+                        "199": {
+                            "backend": 1
+                        },
+                        "200": {
+                            "backend": 1
+                        },
+                        "201": {
+                            "backend": 1
+                        },
+                        "202": {
+                            "backend": 1
+                        },
+                        "203": {
+                            "backend": 1
+                        },
+                        "204": {
+                            "backend": 1
+                        },
+                        "205": {
+                            "backend": 1
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "4cfe7437-d872-4381-a471-4105b9dacf24",
+            "name": "Book View/Ladder",
+            "category": "AI / ML",
+            "categoryId": "ai-related",
+            "description": "Better functionality for building a ladder for a school using last year's info but also prompts from them as well as analysis of class sizes.",
+            "order": 11,
+            "items": [
+                {
+                    "title": "Ladder Wizard",
+                    "startDate": "2026-06-28T23:00:00.000Z",
+                    "endDate": "2026-09-19T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "ee58f77c-0384-4562-bfdc-69800bf1c013",
+                    "resourceAllocation": {
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "209": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "210": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Analyze last year’s ladder, allow user to freeform write their ladder requests for this year, measure class sizes against typical portrait sizes for the school, and present a suggested ladder that the user can tweak/apply."
+                },
+                {
+                    "title": "New Celebration Screen + Cheers",
+                    "startDate": "2027-01-04T00:00:00.000Z",
+                    "endDate": "2027-02-14T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "ad7398e7-60fe-417e-962d-ada4d5a2a779",
+                    "resourceAllocation": {
+                        "216": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "217": {
+                            "frontend": 1
+                        }
+                    },
+                    "description": "New graphics and more controlled functionality at the point of submission to allow users to continue the celebration or to turn it off if it annoys them; implant other elements of cheering them on as they accomplish other milestones."
+                }
+            ]
+        },
+        {
+            "id": "0bc0c582-5d63-4fd1-9020-0a5b12649ba9",
+            "name": "Modules move to fabric JS",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "Solve the persistent problems of Portrait Flow and Index Builder by relying less on the BE.",
+            "order": 12,
+            "items": [
+                {
+                    "title": "Index Builder to Fabric",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-04-04T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "6af3b547-cde9-44fe-a55f-aeccb4ff57ac",
+                    "resourceAllocation": {
+                        "199": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "200": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "201": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Solve the problem of accurate text columns by moving IB to the fabric."
+                },
+                {
+                    "title": "Portrait Flow to Fabric",
+                    "startDate": "2026-04-26T23:00:00.000Z",
+                    "endDate": "2026-07-18T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "b2676024-6947-4799-9431-fb7a828af263",
+                    "resourceAllocation": {
+                        "204": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Susan needs help here"
+                }
+            ]
+        },
+        {
+            "id": "6a3acb2f-7a67-4fba-8ff1-71437739af01",
+            "name": "Cost Savers (independent-ish)",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "",
+            "order": 13,
+            "items": [
+                {
+                    "title": "OAC Template Upsell",
+                    "startDate": "2026-06-28T23:00:00.000Z",
+                    "endDate": "2026-08-29T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "4fd92444-90bb-4b40-bd49-19afbcfbb4b0",
+                    "resourceAllocation": {
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "209": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Normal templates, build your own - no change. But for upsell we show their images that we’ve rendered/treated in cool ways and put the content in a crazy cool page that they can opt to purchase for $25 upsell. Give us your content, we design, here are your choices."
+                },
+                {
+                    "title": "Campus Capsule",
+                    "startDate": "2026-08-31T00:00:00.000Z",
+                    "endDate": "2026-11-22T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "4cbd602c-2e80-4344-adc2-529c59685d52",
+                    "resourceAllocation": {
+                        "210": {
+                            "frontend": 2,
+                            "backend": 1
+                        },
+                        "211": {
+                            "frontend": 2,
+                            "backend": 1
+                        },
+                        "212": {
+                            "frontend": 2,
+                            "backend": 1
+                        },
+                        "213": {
+                            "frontend": 2,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Seeded by images from your Varsity yearbook and info/activities we know from the pages of your book, Campus Capsule is a public-facing microsite that is purchasable by parents on a yearly basis as a chronicle of their child's achievements/awards/academics that bridges to college apps, downloadable resumes, and Linked In."
+                },
+                {
+                    "title": "Your Years - Shared Galleries",
+                    "startDate": "2026-11-23T00:00:00.000Z",
+                    "endDate": "2027-02-14T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "b2396507-2b9a-4772-b299-826da3b63340",
+                    "resourceAllocation": {
+                        "214": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "215": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "216": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "217": {
+                            "frontend": 2,
+                            "backend": 2
+                        }
+                    },
+                    "description": "Microsites focused on specific groups to share their media/memories from x event. Groups are targeted as club pics come in, events go in the book, teams are highlighted. Auto campaign can email the people we see who participated in the Fall Play, and with this site, they can collaborate specifically with other students/parents who are part of the same event. Purchase a print of this, purchase preserved access to this digital content. The yearbook is how the school remembers you. Your Years is where you store your memories - all of them."
+                }
+            ]
+        },
+        {
+            "id": "57d06d00-d001-448b-8fd9-8a23988ee847",
+            "name": "Revenue Makers",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "Primarily outside of eDesign ideas for features to help increase revenue.",
+            "order": 14,
+            "items": [
+                {
+                    "title": "MediaClip replacement",
+                    "startDate": "2026-06-07T23:00:00.000Z",
+                    "endDate": "2026-08-29T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "b480c75c-f670-4e6b-b800-d7a58568e487",
+                    "resourceAllocation": {
+                        "206": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "207": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "208": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "209": {
+                            "frontend": 2,
+                            "backend": 2
+                        }
+                    },
+                    "description": "Can we build out own little interface rather than paying a third party, and can this solve the \"Editable Ads\" problem? When fused with Smart Template, could also lead to upsell in the ad buying process."
+                },
+                {
+                    "title": "FE Ladder Preview",
+                    "startDate": "2026-08-31T00:00:00.000Z",
+                    "endDate": "2026-11-22T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "ca68f252-4824-41d9-ad0f-bac27858ce8b",
+                    "resourceAllocation": {
+                        "210": {
+                            "frontend": 1
+                        },
+                        "211": {
+                            "frontend": 1
+                        },
+                        "212": {
+                            "frontend": 1
+                        },
+                        "213": {
+                            "frontend": 1
+                        }
+                    },
+                    "description": "Ladder previews on FE: Pull ladder thumbnails to processing on the FE and save on infra costs."
+                },
+                {
+                    "title": "Full Story Replacement",
+                    "startDate": "2026-11-23T00:00:00.000Z",
+                    "endDate": "2027-01-03T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "ec36caf1-4dce-4380-8706-74922e56a4c0",
+                    "resourceAllocation": {},
+                    "description": "No details - just documenting this wish"
+                }
+            ]
+        },
+        {
+            "id": "cd74a2cf-14e4-4e75-a8fb-1967638857ad",
+            "name": "AI Design Assistant",
+            "category": "AI / ML",
+            "categoryId": "ai-related",
+            "description": "Design Assistant: Using the trained on JSON model, utilize AI for a layout analysis and feedback for improvement (which could look for things like consistent spacing between content, consistent font sizes/styles, cropping improvements, etc…)",
+            "order": 15,
+            "items": [
+                {
+                    "title": "AI Design Assistant",
+                    "startDate": "2026-08-31T00:00:00.000Z",
+                    "endDate": "2026-11-22T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ai-related",
+                    "id": "8065086a-d62b-48ff-8cd4-1d8a7b707a84",
+                    "resourceAllocation": {
+                        "210": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "211": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "212": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "213": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Design Assistant: Using the trained on JSON model, utilize AI for a layout analysis and feedback for improvement (which could look for things like consistent spacing between content, consistent font sizes/styles, cropping improvements, etc…)"
+                }
+            ]
+        },
+        {
+            "id": "140d2bcb-eeea-4380-b031-539a4cfbd161",
+            "name": "Program Guide",
+            "category": "Ongoing",
+            "categoryId": "ongoing",
+            "description": "",
+            "order": 16,
+            "items": [
+                {
+                    "title": "Program Guide 2027",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-02-01T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "3b663faa-e1b2-4496-839b-29696b812bb5",
+                    "resourceAllocation": {
+                        "199": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "200": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "201": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "202": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "205": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "206": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "207": {
+                            "frontend": 1,
+                            "backend": 1
+                        },
+                        "208": {
+                            "frontend": 1,
+                            "backend": 1
+                        }
+                    },
+                    "description": "Ongoing work to prep for the new book types."
+                }
+            ]
+        },
+        {
+            "id": "1493e943-6592-4799-b2bd-7101fcac7ce8",
+            "name": "YOC Rewrite",
+            "category": "Ongoing",
+            "categoryId": "ongoing",
+            "description": "",
+            "order": 17,
+            "items": [
+                {
+                    "title": "YOC Implementation",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-06-27T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "84a0ab80-fc74-4433-bead-9a0bb1473a8d",
+                    "resourceAllocation": {},
+                    "description": "YOC rewrite with CG"
+                }
+            ]
+        },
+        {
+            "id": "89a2362d-59ec-4b75-8423-3a143bf58994",
+            "name": "Sales and Sales Reports",
+            "category": "Ongoing",
+            "categoryId": "ongoing",
+            "description": "",
+            "order": 18,
+            "items": [
+                {
+                    "title": "Sales and Sales Reports",
+                    "startDate": "2026-01-12T00:00:00.000Z",
+                    "endDate": "2026-04-04T23:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "ongoing",
+                    "id": "348d53ac-50cc-4596-970d-39d3af8b35cf",
+                    "resourceAllocation": {
+                        "199": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "200": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "201": {
+                            "frontend": 2,
+                            "backend": 2
+                        },
+                        "202": {
+                            "frontend": 2,
+                            "backend": 2
+                        }
+                    },
+                    "description": "Ongoing work to finalize and release new Sales, including Sales Reports. "
+                }
+            ]
+        },
+        {
+            "id": "caa141be-8f8e-4075-859b-bcf3ec7f56ed",
+            "name": "Platform Upgrade",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "Client event logging framework",
+            "order": 19,
+            "items": [
+                {
+                    "title": "Build client event logging framework",
+                    "startDate": "2026-11-02T00:00:00.000Z",
+                    "endDate": "2026-12-13T00:00:00.000Z",
+                    "resourceIds": [],
+                    "dependencyIds": [],
+                    "operationalCost": 0,
+                    "type": "one-off",
+                    "id": "ae474779-68f3-4366-b384-4181a303a57b",
+                    "resourceAllocation": {}
+                }
+            ]
+        },
+        {
+            "id": "d65e2543-221b-4a69-be83-073379ca8c95",
+            "name": "Bugs",
+            "category": "Ongoing",
+            "categoryId": "ongoing",
+            "description": "Hate 'em but we gotta plan to tackle them. ",
+            "order": 20,
+            "items": []
+        },
+        {
+            "id": "3d8cf7ec-f0dc-406c-914e-24dd1615f0b5",
+            "name": "Font Process Improvements",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "There has got to be a better way for fonts. As we look at how we load them, can we solution a way for schools to actually use their own custom font?",
+            "order": 21,
+            "items": []
+        },
+        {
+            "id": "ca8f3bf9-ef37-443e-b5a4-0fc4055e603c",
+            "name": "Tag Wizard - Ongoing jump start",
+            "category": "One-off",
+            "categoryId": "one-off",
+            "description": "Adjust Tag Wizard so that jump start isn't just a one-time event and so that it can always look in both places for a face to match.",
+            "order": 22,
+            "items": []
+        }
+    ],
+    "resources": []
+}
